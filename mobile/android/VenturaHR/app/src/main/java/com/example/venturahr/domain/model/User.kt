@@ -1,4 +1,3 @@
 package com.example.venturahr.domain.model
 
-class User {
-}
+data class User(val name: String, val lastName: String)
