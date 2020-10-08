@@ -18,7 +18,7 @@ export default class CreateJobVacancies1602166924213 implements MigrationInterfa
             isNullable: false,
           },
           {
-            name: 'company_name',
+            name: 'companyName',
             type: 'varchar',
             isNullable: false,
           },
@@ -43,7 +43,7 @@ export default class CreateJobVacancies1602166924213 implements MigrationInterfa
             isNullable: false,
           },
           {
-            name: 'closing_date',
+            name: 'closingDate',
             type: 'timestamp with time zone',
             isNullable: false,
           },

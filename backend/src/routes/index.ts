@@ -1,9 +1,7 @@
 import { Router } from 'express'
+import jobvacanciesRouter from './jobvacancies.routes'
 
 const routes = Router()
-
-routes.get('/', (request, response) => response.json({ message: 'Hello World' }))
-
-routes.get('/vagas', (request, response) => response.json({ vagas: 'vaga1, vaga2, vaga3' }))
+routes.use('/jobvacancies', jobvacanciesRouter)
 
 export default routes
