@@ -15,40 +15,40 @@ export default class CreateJobVacancies1602166924213 implements MigrationInterfa
           {
             name: 'description',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'company_name',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'city',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'state',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'contractType',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'criteriaList',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'closing_date',
             type: 'timestamp with time zone',
-            isNullable: false
-          }
-        ]
-      }
+            isNullable: false,
+          },
+        ],
+      }),
     )
   }
 
