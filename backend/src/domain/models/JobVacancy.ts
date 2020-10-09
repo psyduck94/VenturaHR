@@ -21,10 +21,13 @@ class JobVacancy {
   @Column()
   contractType: string
 
+  @Column()
+  contractDuration: string
+
   @Column('timestamp with time zone')
   closingDate: Date
 
-  @Column()
+  @Column('text', { array: true })
   criteriaList: string[]
 }
 

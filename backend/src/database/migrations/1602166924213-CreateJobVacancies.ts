@@ -11,6 +11,7 @@ export default class CreateJobVacancies1602166924213 implements MigrationInterfa
             type: 'varchar',
             isPrimary: true,
             generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'description',
@@ -35,11 +36,17 @@ export default class CreateJobVacancies1602166924213 implements MigrationInterfa
           {
             name: 'contractType',
             type: 'varchar',
-            isNullable: false,
+            isNullable: true,
+          },
+          {
+            name: 'contractDuration',
+            type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'criteriaList',
             type: 'varchar',
+            isArray: true,
             isNullable: false,
           },
           {

@@ -5,6 +5,9 @@
   "username": "postgres",
   "password": "secret01",
   "database": "venturahr",
+  "entities": [
+    "./src/domain/models/*.ts"
+  ],
   "migrations": [
     "./src/database/migrations/*.ts"
   ],

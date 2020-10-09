@@ -8,10 +8,38 @@ interface Request {
   city: string
   state: string
   contractType: string
+  contractDuration: string
   closingDate: Date
   criteriaList: string[]
 }
 
 class CreateJobVacancyService {
+  public async execute({
+    description,
+    companyName,
+    city,
+    state,
+    contractType,
+    contractDuration,
+    closingDate,
+    criteriaList,
+  }: Request): Promise<JobVacancy> {
+    const jobVacancyRepository = getCustomRepository(JobVacancyRepository)
+    const jobVacancy = jobVacancyRepository.create({
+      description,
+      companyName,
+      city,
+      state,
+      contractType,
+      contractDuration,
+      closingDate,
+      criteriaList,
+    })
 
+    await jobVacancyRepository.save(jobVacancy)
+
+    return jobVacancy
+  }
 }
+
+export default CreateJobVacancyService
