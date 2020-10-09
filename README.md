@@ -11,6 +11,7 @@ os requisitos para contratação têm um dinamismo vertiginoso,pois as tecnologi
 - **PostgreSQL** - _Banco de Dados_
 - **Nodemon** - _Framework que monitora e atualiza o servidor quando houver qualquer mudança no código_
 - **ESLint** - _Padrão de desenvolvimento_
+- **TypeORM** - _Framework de ORM que funciona para qualquer tipo de database_
 
 ### Frontend
 - **ReactJS** - _Framework de Javascript para o FrontEnd_
