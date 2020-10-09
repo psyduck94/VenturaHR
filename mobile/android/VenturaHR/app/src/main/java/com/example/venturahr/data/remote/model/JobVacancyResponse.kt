@@ -1,6 +1,11 @@
-package com.example.venturahr.domain.model
+package com.example.venturahr.data.remote.model
 
-class JobVacancy(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "job_vacancies")
+class JobVacancyResponse(
+    @PrimaryKey
     val id: String,
     val description: String,
     val companyName: String,
