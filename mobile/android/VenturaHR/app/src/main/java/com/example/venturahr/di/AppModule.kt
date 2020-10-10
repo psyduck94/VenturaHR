@@ -14,6 +14,7 @@ import com.example.venturahr.domain.usecases.SetItsNotTheUsersFirstTime
 import com.example.venturahr.presentation.account.AccountViewModel
 import com.example.venturahr.presentation.bookmarks.BookmarksViewModel
 import com.example.venturahr.presentation.home.HomeViewModel
+import com.example.venturahr.presentation.home.JobVacancyAdapter
 import com.example.venturahr.presentation.intro.IntroViewModel
 import com.example.venturahr.presentation.main.MainViewModel
 import com.example.venturahr.presentation.splash.SplashViewModel
@@ -35,15 +36,17 @@ val appModule = module {
         )
     }
 
+    factory { JobVacancyAdapter() }
+
     viewModel { IntroViewModel() }
 
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get()) }
 
     viewModel { BookmarksViewModel() }
 
     viewModel { AccountViewModel() }
 
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel() }
 
     factory { IsUserFirstTime(get()) }
 

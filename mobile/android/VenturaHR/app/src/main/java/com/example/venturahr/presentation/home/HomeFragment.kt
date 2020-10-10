@@ -6,10 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.venturahr.R
+import com.example.venturahr.domain.usecases.ListJobVacanciesFromApi
+import com.example.venturahr.util.defaultRecyclerViewLayout
+import com.example.venturahr.util.toast
+import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.ext.android.inject
 
-class HomeFragment : Fragment() {
+class HomeFragment(private val listJobVacanciesFromApi: ListJobVacanciesFromApi) : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val viewModel by inject<HomeViewModel>()
+    private val jobVacancyAdapter by inject<JobVacancyAdapter>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,5 +27,29 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView()
+        initViewModelObservers()
+
+        viewModel.fetchJobVacanciesFromApi()
+    }
+
+    private fun initRecyclerView() {
+        recycler_view_latest_jobs.apply {
+            setHasFixedSize(true)
+            layoutManager = defaultRecyclerViewLayout()
+            adapter = jobVacancyAdapter
+        }
+    }
+
+    private fun initViewModelObservers() {
+        viewModel.apply {
+            jobVacancies.observe(viewLifecycleOwner, {
+                jobVacancyAdapter.updateJobVacancyList(it)
+            })
+            failedToListJobVacancies.observe(viewLifecycleOwner, {
+                toast(getString(R.string.warning_empty_job_vacancy_list))
+            })
+        }
     }
 }
