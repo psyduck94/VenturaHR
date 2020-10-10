@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".presentation.main.MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
         <activity android:name=".presentation.intro.IntroActivity" />
         <activity
             android:name=".presentation.splash.SplashActivity"

@@ -18,6 +18,7 @@ class JobVacancyMapper {
                     state = it.state,
                     companyName = it.companyName,
                     companyLogo = it.companyLogo,
+                    companyDescription = it.companyDescription,
                     contractType = it.contractType,
                     contractDuration = it.contractDuration,
                     criteriaList = it.criteriaList

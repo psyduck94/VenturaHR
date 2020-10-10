@@ -7,7 +7,16 @@ class JobVacancy {
   id: string
 
   @Column()
+  title: string
+
+  @Column()
   description: string
+
+  @Column()
+  companyLogo: string
+
+  @Column()
+  companyDescription: string
 
   @Column()
   companyName: string

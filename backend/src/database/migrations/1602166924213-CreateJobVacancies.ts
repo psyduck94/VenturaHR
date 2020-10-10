@@ -14,12 +14,27 @@ export default class CreateJobVacancies1602166924213 implements MigrationInterfa
             default: 'uuid_generate_v4()',
           },
           {
+            name: 'title',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
             name: 'description',
             type: 'varchar',
             isNullable: false,
           },
           {
+            name: 'companyLogo',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'companyName',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'companyDescription',
             type: 'varchar',
             isNullable: false,
           },

@@ -24,7 +24,7 @@ class HomeViewModel(private val listJobVacanciesFromApi: ListJobVacanciesFromApi
     }
     private fun handleRequestStatus(requestStatus: RequestStatus<List<JobVacancy>>) {
         when (requestStatus) {
-            is RequestStatus.Success -> requestStatus.data
+            is RequestStatus.Success -> jobVacanciesLiveData.postValue(requestStatus.data)
             is RequestStatus.Error -> failedToListJobVacanciesLiveData.postValue(Unit)
         }
     }

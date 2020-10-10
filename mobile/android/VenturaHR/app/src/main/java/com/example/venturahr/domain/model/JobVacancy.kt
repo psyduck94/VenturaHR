@@ -6,6 +6,7 @@ class JobVacancy(
     val description: String,
     val companyLogo: String,
     val companyName: String,
+    val companyDescription: String,
     val city: String,
     val state: String,
     val contractType: String,

@@ -20,7 +20,10 @@ jobVacanciesRouter.post('/', async (request, response) => {
   try {
     const {
       description,
+      title,
+      companyLogo,
       companyName,
+      companyDescription,
       city,
       state,
       contractType,
@@ -33,7 +36,10 @@ jobVacanciesRouter.post('/', async (request, response) => {
     const createJobVacancy = new CreateJobVacancyService()
     const jobVacancy = await createJobVacancy.execute({
       description,
+      title,
+      companyLogo,
       companyName,
+      companyDescription,
       city,
       state,
       contractType,

@@ -1,21 +1,22 @@
 package com.example.venturahr.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.venturahr.R
-import com.example.venturahr.domain.usecases.ListJobVacanciesFromApi
 import com.example.venturahr.util.defaultRecyclerViewLayout
 import com.example.venturahr.util.toast
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
 
-class HomeFragment(private val listJobVacanciesFromApi: ListJobVacanciesFromApi) : Fragment() {
+class HomeFragment : Fragment() {
 
-    private val viewModel by inject<HomeViewModel>()
     private val jobVacancyAdapter by inject<JobVacancyAdapter>()
+    private val viewModel by inject<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

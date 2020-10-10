@@ -4,7 +4,10 @@ import JobVacancyRepository from '../repositories/JobVacancyRepository'
 
 interface Request {
   description: string
+  title: string
+  companyLogo: string
   companyName: string
+  companyDescription: string
   city: string
   state: string
   contractType: string
@@ -16,7 +19,10 @@ interface Request {
 class CreateJobVacancyService {
   public async execute({
     description,
+    title,
+    companyLogo,
     companyName,
+    companyDescription,
     city,
     state,
     contractType,
@@ -27,7 +33,10 @@ class CreateJobVacancyService {
     const jobVacancyRepository = getCustomRepository(JobVacancyRepository)
     const jobVacancy = jobVacancyRepository.create({
       description,
+      title,
+      companyLogo,
       companyName,
+      companyDescription,
       city,
       state,
       contractType,
