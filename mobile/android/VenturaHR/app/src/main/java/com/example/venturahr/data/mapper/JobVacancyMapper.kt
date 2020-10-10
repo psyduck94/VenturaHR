@@ -12,10 +12,12 @@ class JobVacancyMapper {
             jobVacancyResponse.map {
                 val jobVacancyDomain = JobVacancy(
                     id = it.id,
+                    title = it.title,
                     description = it.description,
                     city = it.city,
                     state = it.state,
                     companyName = it.companyName,
+                    companyLogo = it.companyLogo,
                     contractType = it.contractType,
                     contractDuration = it.contractDuration,
                     criteriaList = it.criteriaList

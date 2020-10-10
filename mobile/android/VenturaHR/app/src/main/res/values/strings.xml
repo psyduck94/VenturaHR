@@ -4,7 +4,11 @@
     <string name="btn_no_thanks">Não, obrigado</string>
     <string name="btn_sign_up">CADASTRAR</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_saved">Saved</string>
-    <string name="title_account">Account</string>
+    <string name="title_home">Início</string>
+    <string name="title_saved">Salvos</string>
+    <string name="title_account">Conta</string>
+    <string name="title_hello">Olá!</string>
+    <string name="desc_search_jobs">Digite o nome da vaga, empresa ou critérios no campo abaixo!</string>
+    <string name="hint_search_jobs">Procure por uma vaga!</string>
+    <string name="title_recently_added">Últimas Vagas Publicadas</string>
 </resources>
