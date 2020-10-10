@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".presentation.intro.IntroActivity"></activity>
         <activity android:name=".presentation.main.MainActivity" />
         <activity
             android:name=".presentation.splash.SplashActivity"

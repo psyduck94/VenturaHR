@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">VenturaHR</string>
+    <string name="desc_intro">VenturaHR é um aplicativo que facilita a busca de empregos por meios de pesquisa de nome de vagas, empresa, critérios e mais! Se cadastre para obter mais funcionalidades!</string>
+    <string name="btn_no_thanks">Não, obrigado</string>
+    <string name="btn_sign_up">CADASTRAR</string>
 </resources>
