@@ -11,6 +11,10 @@ import com.example.venturahr.domain.repository.UserFirstTimeRepository
 import com.example.venturahr.domain.usecases.IsUserFirstTime
 import com.example.venturahr.domain.usecases.ListJobVacanciesFromApi
 import com.example.venturahr.domain.usecases.SetItsNotTheUsersFirstTime
+import com.example.venturahr.presentation.account.AccountViewModel
+import com.example.venturahr.presentation.bookmarks.BookmarksViewModel
+import com.example.venturahr.presentation.home.HomeViewModel
+import com.example.venturahr.presentation.intro.IntroViewModel
 import com.example.venturahr.presentation.main.MainViewModel
 import com.example.venturahr.presentation.splash.SplashViewModel
 import org.koin.android.ext.koin.androidContext
@@ -31,9 +35,15 @@ val appModule = module {
         )
     }
 
-    viewModel {
-        MainViewModel(get())
-    }
+    viewModel { IntroViewModel() }
+
+    viewModel { HomeViewModel() }
+
+    viewModel { BookmarksViewModel() }
+
+    viewModel { AccountViewModel() }
+
+    viewModel { MainViewModel(get()) }
 
     factory { IsUserFirstTime(get()) }
 

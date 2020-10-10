@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.example.venturahr.domain.enums.FirstTimeState
 import com.example.venturahr.presentation.intro.IntroActivity
-import com.example.venturahr.presentation.main.MainActivity
-import com.example.venturahr.util.exhaustive
 import org.koin.android.ext.android.inject
 
 class SplashActivity : AppCompatActivity() {
