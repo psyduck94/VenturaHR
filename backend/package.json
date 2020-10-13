@@ -10,8 +10,10 @@
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
+    "@types/cors": "^2.8.8",
     "@types/date-fns": "^2.6.0",
     "@types/uuidv4": "^5.0.0",
+    "cors": "^2.8.5",
     "date-fns": "^2.16.1",
     "express": "^4.17.1",
     "pg": "^8.4.0",
