@@ -33,3 +33,8 @@ os requisitos para contratação têm um dinamismo vertiginoso,pois as tecnologi
 <img src="/images/venturahr1.png" width="700">
 <img src="/images/venturahr2.png" width="700">
 <img src="/images/venturahr3.png" width="700">
+
+## Capturas de Tela - Android
+<img src="/images/android1.png" width="200"> <img src="/images/android2.png" width="200"> <img src="/images/android3.png" width="200">
+
+
