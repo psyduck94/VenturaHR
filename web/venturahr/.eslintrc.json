@@ -40,6 +40,11 @@
                 "ts": "never",
                 "tsx": "never"
             }
+        ],
+        "@typescript-eslint/explict-function-return-type": [
+            "error", {
+                "allowExpressions": true
+            }
         ]
     },
     "settings": {

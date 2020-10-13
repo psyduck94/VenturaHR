@@ -1,11 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavBar, Header, MainContainer, Form, Tutorial, LatestJobs } from './styles'
 import logo from '../../assets/venturahrlogo.jpg'
 import person from '../../assets/working.jpg'
 import tutorial from '../../assets/venturahrtutorial.svg'
 import { FiChevronRight } from 'react-icons/fi'
+import api from '../../services/api'
+
+interface JobVacancy {
+    id: string
+    title: string
+    companyName: string
+    companyLogo: string
+    city: string
+}
 
 const Index: React.FC = () => {
+    const [jobVacancies, setJobVacancies] = useState<JobVacancy[]>([])
+
+    useEffect(() => {
+        api.get('jobvacancies').then(response => {
+            setJobVacancies(response.data)
+        })
+    }, [])
+
+    async function handleGetJobVacancies(): Promise<void> {
+        const response = await api.get('jobvacancies')
+        const jobVacancies = response.data
+
+        setJobVacancies(jobVacancies)
+    }
+
     return (
         <React.Fragment>
 
@@ -37,54 +61,20 @@ const Index: React.FC = () => {
 
             <LatestJobs>
                 <h1>Últimas <span>vagas</span> publicadas</h1>
-                <a href="#">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/768px-Instagram_logo_2016.svg.png"
-                        alt="Logo da Empresa"
-                        width="40px"
-                    />
-                    <div>
-                        <strong>Instagram - SP</strong>
-                        <p>Desenvolvedor Android</p>
-                    </div>
+                {jobVacancies.map(jobVacancy => (
+                    <a key={jobVacancy.id} href="#">
+                        <img src={jobVacancy.companyLogo}
+                            alt="Logo da Empresa"
+                            width="40px"
+                        />
+                        <div>
+                            <strong>{jobVacancy.companyName} - {jobVacancy.city}</strong>
+                            <p>{jobVacancy.title}</p>
+                        </div>
 
-                    <FiChevronRight size={20}></FiChevronRight>
-                </a>
-                <a href="#">
-                    <img src="https://i1.wp.com/sarakappler.com/wp-content/uploads/2018/05/logo-slack-png-300.png?fit=300%2C300&ssl=1"
-                        alt="Logo da Empresa"
-                        width="40px"
-                    />
-                    <div>
-                        <strong>Slack - RJ</strong>
-                        <p>Designer Visual</p>
-                    </div>
-
-                    <FiChevronRight size={20}></FiChevronRight>
-                </a>
-                <a href="#">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/471px-Google_%22G%22_Logo.svg.png"
-                        alt="Logo da Empresa"
-                        width="40px"
-                    />
-                    <div>
-                        <strong>Google - SP</strong>
-                        <p>Engenheiro de Software</p>
-                    </div>
-
-                    <FiChevronRight size={20}></FiChevronRight>
-                </a>
-                <a href="#">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1365px-Facebook_f_logo_%282019%29.svg.png"
-                        alt="Logo da Empresa"
-                        width="40px"
-                    />
-                    <div>
-                        <strong>Facebook - SP</strong>
-                        <p>UX Designer</p>
-                    </div>
-
-                    <FiChevronRight size={20}></FiChevronRight>
-                </a>
+                        <FiChevronRight size={20}></FiChevronRight>
+                    </a>
+                ))}
             </LatestJobs>
 
         </React.Fragment>
