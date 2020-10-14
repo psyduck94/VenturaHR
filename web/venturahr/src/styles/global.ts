@@ -22,8 +22,14 @@ h1 {
     color: #050931;
 }
 
+h2 {
+    color: #050931;
+    font-size: 20px;
+}
+
 p {
-    color: #232323
+    color: #232323;
+    font-weight: 300;
 }
 
 span {

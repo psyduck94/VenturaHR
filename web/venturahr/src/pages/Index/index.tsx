@@ -3,8 +3,11 @@ import { NavBar, Header, MainContainer, Form, Tutorial, LatestJobs } from './sty
 import logo from '../../assets/venturahrlogo.jpg'
 import person from '../../assets/working.jpg'
 import tutorial from '../../assets/venturahrtutorial.svg'
+import { Link } from 'react-router-dom'
 import { FiChevronRight } from 'react-icons/fi'
 import api from '../../services/api'
+
+/* Front-end da página inicial do site venturaHR (Index) */
 
 interface JobVacancy {
     id: string
@@ -15,7 +18,12 @@ interface JobVacancy {
 }
 
 const Index: React.FC = () => {
-    const [jobVacancies, setJobVacancies] = useState<JobVacancy[]>([])
+
+    const [jobVacancies, setJobVacancies] = useState<JobVacancy[]>(() => {
+        const storagedRepositories = localStorage.getItem('@VenturaHR:jobvacancies',)
+        if (storagedRepositories) return JSON.parse(storagedRepositories)
+        return []
+    })
 
     useEffect(() => {
         api.get('jobvacancies').then(response => {
@@ -23,16 +31,12 @@ const Index: React.FC = () => {
         })
     }, [])
 
-    async function handleGetJobVacancies(): Promise<void> {
-        const response = await api.get('jobvacancies')
-        const jobVacancies = response.data
-
-        setJobVacancies(jobVacancies)
-    }
+    useEffect(() => {
+        localStorage.setItem('@VenturaHR:jobvacancies', JSON.stringify(jobVacancies))
+    }, [jobVacancies])
 
     return (
-        <React.Fragment>
-
+        <>
             <Header>
                 <img src={logo} alt="venturahr logo" width="80"></img>
                 <NavBar>
@@ -42,7 +46,7 @@ const Index: React.FC = () => {
                         <li><a href="#">Entrar</a></li>
                     </ul>
                 </NavBar>
-                <a className="cta" href="#"><button>Cadastrar</button></a>
+                <Link className="cta" to="/cadastro"><button>Cadastrar</button></Link>
             </Header>
 
             <MainContainer>
@@ -62,22 +66,21 @@ const Index: React.FC = () => {
             <LatestJobs>
                 <h1>Últimas <span>vagas</span> publicadas</h1>
                 {jobVacancies.map(jobVacancy => (
-                    <a key={jobVacancy.id} href="#">
+
+                    <Link key={jobVacancy.id} to={`/jobvacancies/${jobVacancy.id}`}>
                         <img src={jobVacancy.companyLogo}
                             alt="Logo da Empresa"
-                            width="40px"
-                        />
+                            width="40px" />
                         <div>
                             <strong>{jobVacancy.companyName} - {jobVacancy.city}</strong>
                             <p>{jobVacancy.title}</p>
                         </div>
 
                         <FiChevronRight size={20}></FiChevronRight>
-                    </a>
+                    </Link>
                 ))}
             </LatestJobs>
-
-        </React.Fragment>
+        </>
     )
 }
 

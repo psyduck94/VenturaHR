@@ -137,6 +137,7 @@ export const LatestJobs = styled.div`
         }
 
         p {
+            font-weight: 400;
             margin-top: 4px;
         }
     }

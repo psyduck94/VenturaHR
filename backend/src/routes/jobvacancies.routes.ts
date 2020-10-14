@@ -4,6 +4,8 @@ import { parseISO } from 'date-fns'
 import JobVacancyRepository from '../repositories/JobVacancyRepository'
 import CreateJobVacancyService from '../services/CreateJobVacancyService'
 
+/* Gerenciamento de Rotas da Aplicação */
+
 const jobVacanciesRouter = Router()
 
 jobVacanciesRouter.get('/', async (request, response) => {
@@ -11,6 +13,17 @@ jobVacanciesRouter.get('/', async (request, response) => {
     const jobVacanciesRepository = getCustomRepository(JobVacancyRepository)
     const jobVacancies = await jobVacanciesRepository.find()
     return response.json(jobVacancies)
+  } catch (err) {
+    return response.status(400).json({ error: err.message })
+  }
+})
+
+jobVacanciesRouter.get('/:id', async (request, response) => {
+  try {
+    const { params } = request
+    const jobVacanciesRepository = getCustomRepository(JobVacancyRepository)
+    const jobVacancy = await jobVacanciesRepository.findOne(params)
+    return response.json(jobVacancy)
   } catch (err) {
     return response.status(400).json({ error: err.message })
   }
