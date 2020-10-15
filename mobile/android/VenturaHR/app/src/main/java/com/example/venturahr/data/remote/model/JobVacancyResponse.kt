@@ -16,5 +16,6 @@ class JobVacancyResponse(
     val state: String,
     val contractType: String,
     val contractDuration: String,
+    val closingDate: String,
     val criteriaList: List<String>
 )

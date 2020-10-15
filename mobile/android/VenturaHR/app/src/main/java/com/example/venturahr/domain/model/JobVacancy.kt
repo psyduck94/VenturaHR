@@ -1,5 +1,9 @@
 package com.example.venturahr.domain.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 class JobVacancy(
     val id: String,
     val title: String,
@@ -11,5 +15,6 @@ class JobVacancy(
     val state: String,
     val contractType: String,
     val contractDuration: String,
+    val closingDate: String,
     val criteriaList: List<String>
-)
+) : Parcelable

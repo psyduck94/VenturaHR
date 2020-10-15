@@ -21,6 +21,7 @@ class JobVacancyMapper {
                     companyDescription = it.companyDescription,
                     contractType = it.contractType,
                     contractDuration = it.contractDuration,
+                    closingDate = it.closingDate,
                     criteriaList = it.criteriaList
                 )
                 jobVacanciesDomain.add(jobVacancyDomain)

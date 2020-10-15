@@ -5,6 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.venturahr.R
+import com.example.venturahr.presentation.home.HomeFragment
+import com.example.venturahr.presentation.main.MainActivity
+import kotlinx.android.synthetic.main.activity_intro.*
 
 class IntroActivity : AppCompatActivity() {
 
@@ -15,5 +18,7 @@ class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
+
+        btn_no_thanks.setOnClickListener { startActivity(MainActivity.getIntent(this)) }
     }
 }

@@ -16,6 +16,9 @@ import com.example.venturahr.presentation.bookmarks.BookmarksViewModel
 import com.example.venturahr.presentation.home.HomeViewModel
 import com.example.venturahr.presentation.home.JobVacancyAdapter
 import com.example.venturahr.presentation.intro.IntroViewModel
+import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsActivity
+import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsViewModel
+import com.example.venturahr.presentation.job_vacancy_details.fragments.details.DetailsViewModel
 import com.example.venturahr.presentation.main.MainViewModel
 import com.example.venturahr.presentation.splash.SplashViewModel
 import org.koin.android.ext.koin.androidContext
@@ -26,6 +29,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val VENTURAHR_BASE_URL = "http://192.168.1.11:3333/"
 
+/* Arquivo responsável por configurar injeções de dependências */
+
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
 val appModule = module {
 
@@ -34,6 +39,14 @@ val appModule = module {
             get<IsUserFirstTime>(),
             get<SetItsNotTheUsersFirstTime>()
         )
+    }
+
+    viewModel {
+        JobVacancyDetailsViewModel()
+    }
+
+    viewModel {
+        DetailsViewModel()
     }
 
     factory { JobVacancyAdapter() }

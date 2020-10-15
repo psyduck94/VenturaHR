@@ -11,5 +11,19 @@
     <string name="desc_search_jobs">Digite o nome da vaga, empresa ou critérios no campo abaixo!</string>
     <string name="hint_search_jobs">Procure por uma vaga!</string>
     <string name="title_recently_added">Últimas Vagas Publicadas</string>
+    <string name="format_city">%s,</string>
     <string name="warning_empty_job_vacancy_list">Erro ao listar vagas. Tente novamente mais tarde</string>
+    <string name="desc_company_logo">Company Logo</string>
+    <string name="btn_save">SALVAR</string>
+    <string name="btn_apply">APLICAR</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_details">Detalhes</string>
+    <string name="tab_company">Empresa</string>
+    <string name="txt_job_vacancy_description">Descrição</string>
+    <string name="txt_criteria_list_title">Requisitos</string>
+    <string name="contract_type_title">Tipo de Contrato</string>
+    <string name="contract_duration_title">Duração de Contrato</string>
+    <string name="closing_date_title">Data de Fechamento</string>
+    <string name="empty_attribute">---</string>
 </resources>

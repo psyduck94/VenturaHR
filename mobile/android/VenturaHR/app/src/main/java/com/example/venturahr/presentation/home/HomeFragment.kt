@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.venturahr.R
+import com.example.venturahr.domain.model.JobVacancy
+import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsActivity
 import com.example.venturahr.util.defaultRecyclerViewLayout
 import com.example.venturahr.util.toast
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.Job
 import org.koin.android.ext.android.inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), JobVacancyAdapter.OnItemClickListener {
 
     private val jobVacancyAdapter by inject<JobVacancyAdapter>()
     private val viewModel by inject<HomeViewModel>()
@@ -41,6 +44,7 @@ class HomeFragment : Fragment() {
             layoutManager = defaultRecyclerViewLayout()
             adapter = jobVacancyAdapter
         }
+        jobVacancyAdapter.setItemClickListener(this)
     }
 
     private fun initViewModelObservers() {
@@ -52,5 +56,9 @@ class HomeFragment : Fragment() {
                 toast(getString(R.string.warning_empty_job_vacancy_list))
             })
         }
+    }
+
+    override fun onJobVacancyClick(jobVacancy: JobVacancy) {
+        startActivity(JobVacancyDetailsActivity.getIntent(this.requireContext(), jobVacancy))
     }
 }
