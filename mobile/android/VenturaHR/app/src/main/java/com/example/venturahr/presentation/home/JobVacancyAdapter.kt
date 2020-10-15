@@ -10,9 +10,12 @@ import com.example.venturahr.R
 import com.example.venturahr.domain.model.JobVacancy
 import com.squareup.picasso.Picasso
 
+/* Classe responsável por adaptar os dados de vagas em uma lista dinâmica */
+
 class JobVacancyAdapter : RecyclerView.Adapter<JobVacancyAdapter.JobVacancyViewHolder>() {
 
     private val jobVacancyList = mutableListOf<JobVacancy>()
+    private var itemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobVacancyViewHolder {
         val view =
@@ -29,7 +32,7 @@ class JobVacancyAdapter : RecyclerView.Adapter<JobVacancyAdapter.JobVacancyViewH
     }
 
     override fun onBindViewHolder(holder: JobVacancyViewHolder, position: Int) =
-        holder.bind(jobVacancyList[position])
+        holder.bind(jobVacancyList[position], itemClickListener)
 
     override fun getItemCount() = jobVacancyList.size
 
@@ -38,12 +41,22 @@ class JobVacancyAdapter : RecyclerView.Adapter<JobVacancyAdapter.JobVacancyViewH
         private val title = itemView.findViewById<TextView>(R.id.title)
         private val city = itemView.findViewById<TextView>(R.id.city)
 
-        fun bind(jobVacancy: JobVacancy) {
+        fun bind(jobVacancy: JobVacancy, clickListener: OnItemClickListener?) {
             Picasso.get().load(jobVacancy.companyLogo).into(companyLogo)
             title.text = jobVacancy.title
             city.text = jobVacancy.city
-        }
 
+            itemView.setOnClickListener { clickListener?.onJobVacancyClick(jobVacancy) }
+        }
     }
+
+    fun setItemClickListener(itemClickListener: OnItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onJobVacancyClick(jobVacancy: JobVacancy)
+    }
+
 
 }
