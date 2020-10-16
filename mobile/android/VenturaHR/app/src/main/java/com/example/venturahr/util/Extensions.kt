@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 
+/* Classe responsável por abstrair métodos bastante usados no projeto */
+
 val <T> T.exhaustive: T
     get() = this
 

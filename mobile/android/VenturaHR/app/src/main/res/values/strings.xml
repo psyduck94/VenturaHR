@@ -1,3 +1,5 @@
+<!-- Arquivo com todos textos utilizados no app -->
+
 <resources>
     <string name="app_name">VenturaHR</string>
     <string name="desc_intro">VenturaHR é um aplicativo que facilita a busca de empregos por meios de pesquisa de nome de vagas, empresa, critérios e mais! Se cadastre para obter mais funcionalidades!</string>
@@ -26,4 +28,9 @@
     <string name="contract_duration_title">Duração de Contrato</string>
     <string name="closing_date_title">Data de Fechamento</string>
     <string name="empty_attribute">---</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Senha</string>
+    <string name="btn_forgot_password">Esqueceu sua senha?</string>
+    <string name="btn_login">Entrar</string>
+    <string name="btn_txt_sign_up">Ainda não tem conta? Clique aqui</string>
 </resources>

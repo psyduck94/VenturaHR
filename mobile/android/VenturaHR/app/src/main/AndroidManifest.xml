@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.job_vacancy_details.JobVacancyDetailsActivity"></activity>
+        <activity android:name=".presentation.login.LoginActivity"></activity>
+        <activity android:name=".presentation.job_vacancy_details.JobVacancyDetailsActivity" />
         <activity
             android:name=".presentation.main.MainActivity"
             android:label="@string/title_activity_main" />
