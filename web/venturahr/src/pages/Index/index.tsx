@@ -43,7 +43,7 @@ const Index: React.FC = () => {
                     <ul>
                         <li><a href="#">Início</a></li>
                         <li><a href="#">Sobre</a></li>
-                        <li><a href="#">Entrar</a></li>
+                        <li><Link to='/login'>Entrar</Link></li>
                     </ul>
                 </NavBar>
                 <Link className="cta" to="/cadastro"><button>Cadastrar</button></Link>
