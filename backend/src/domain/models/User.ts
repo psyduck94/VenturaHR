@@ -8,7 +8,7 @@ class User {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column('text')
+  @Column('enum', { nullable: false, enum: AccountType })
   accountType: AccountType
 
   @Column()

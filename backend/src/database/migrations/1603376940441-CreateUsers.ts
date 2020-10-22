@@ -20,6 +20,7 @@ export default class CreateUsers1603376940441 implements MigrationInterface {
           {
             name: 'accountType',
             type: 'enum',
+            enum: ['admin', 'company', 'candidate'],
             isNullable: false,
           },
           {
