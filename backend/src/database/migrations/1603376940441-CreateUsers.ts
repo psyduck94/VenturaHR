@@ -2,7 +2,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 import AccountType from '../../domain/enums/AccountType'
 
-/* Arquivo que representa a migração de Criar/Alterar a tabela de Usuários */
+/* Arquivo que representa a migração de Criar a tabela de Usuários */
 
 export default class CreateUsers1603376940441 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
