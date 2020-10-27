@@ -33,4 +33,10 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="defaultTextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
 </resources>

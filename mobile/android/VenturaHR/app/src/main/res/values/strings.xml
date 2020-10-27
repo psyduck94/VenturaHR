@@ -1,4 +1,4 @@
-<!-- Arquivo com todos textos utilizados no app -->
+<!-- Arquivo com todos os textos utilizados no app -->
 
 <resources>
     <string name="app_name">VenturaHR</string>
@@ -18,7 +18,6 @@
     <string name="desc_company_logo">Company Logo</string>
     <string name="btn_save">SALVAR</string>
     <string name="btn_apply">APLICAR</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_details">Detalhes</string>
     <string name="tab_company">Empresa</string>
@@ -33,4 +32,50 @@
     <string name="btn_forgot_password">Esqueceu sua senha?</string>
     <string name="btn_login">Entrar</string>
     <string name="btn_txt_sign_up">Ainda não tem conta? Clique aqui</string>
+    <string name="account_type_title">Tipo de Conta</string>
+    <string name="name_hint">Nome</string>
+    <string name="email_hint">E-mail</string>
+    <string name="password_hint">Senha</string>
+    <string name="phone_hint">Telefone</string>
+    <string name="state_hint">Estado</string>
+    <string name="canditade_radio_button">Candidato</string>
+    <string name="company_radio_button">Empresa</string>
+    <string name="admin_radio_button">Administrador</string>
+    <string name="warning_empty_login_form">Por favor, preencha todo o formulário.</string>
+    <string name="state_title">Estado</string>
+    <string name="cpf_hint">CPF</string>
+    <string name="btn_confirm_form">CONFIRMAR</string>
+
+
+    <string-array name="brazilian_states">
+        <item>Acre (AC)</item>
+        <item>Alagoas (AL)</item>
+        <item>Amapá (AP)</item>
+        <item>Amazonas (AM)</item>
+        <item>Bahia (BA)</item>
+        <item>Ceará (CE)</item>
+        <item>Distrito Federal (DF)</item>
+        <item>Espírito Santo (ES)</item>
+        <item>Goiás (GO)</item>
+        <item>Maranhão (MA)</item>
+        <item>Mato Grosso (MT)</item>
+        <item>Mato Grosso do Sul (MS)</item>
+        <item>Minas Gerais (MG)</item>
+        <item>Pará (PA)</item>
+        <item>Paraíba (PB)</item>
+        <item>Paraná (PR)</item>
+        <item> Pernambuco (PE)</item>
+        <item>Piauí (PI)</item>
+        <item>Rio de Janeiro (RJ)</item>
+        <item>Rio Grande do Norte (RN)</item>
+        <item>Rio Grande do Sul (RS)</item>
+        <item>Rondônia (RO)</item>
+        <item>Roraima (RR)</item>
+        Santa Catarina (SC)
+        <item>São Paulo (SP)</item>
+        <item>Sergipe (SE)</item>
+        <item>Tocantins (TO)</item>
+
+    </string-array>
+
 </resources>

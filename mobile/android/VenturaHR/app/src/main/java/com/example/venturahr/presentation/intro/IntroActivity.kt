@@ -8,6 +8,7 @@ import com.example.venturahr.R
 import com.example.venturahr.presentation.home.HomeFragment
 import com.example.venturahr.presentation.login.LoginActivity
 import com.example.venturahr.presentation.main.MainActivity
+import com.example.venturahr.presentation.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_intro.*
 
 /* Classe responsável pela UI da tela de introdução */
@@ -22,7 +23,7 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
-        btn_sign_up.setOnClickListener { startActivity(LoginActivity.getIntent(this)) }
-        btn_no_thanks.setOnClickListener { startActivity(MainActivity.getIntent(this)) }
+        btn_sign_up.setOnClickListener { startActivity(RegisterActivity.getIntent(this)); finish() }
+        btn_no_thanks.setOnClickListener { startActivity(MainActivity.getIntent(this)); finish() }
     }
 }

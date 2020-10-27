@@ -19,3 +19,11 @@ fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 fun Activity.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
+
+fun Activity.toast(stringResourceId: Int, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, getString(stringResourceId), duration).show()
+}
+
+fun Fragment.toast(stringResourceId: Int, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this.context, getString(stringResourceId), duration).show()
+}

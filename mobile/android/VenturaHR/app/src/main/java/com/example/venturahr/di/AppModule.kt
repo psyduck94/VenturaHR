@@ -21,6 +21,7 @@ import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsV
 import com.example.venturahr.presentation.job_vacancy_details.fragments.details.DetailsViewModel
 import com.example.venturahr.presentation.login.LoginViewModel
 import com.example.venturahr.presentation.main.MainViewModel
+import com.example.venturahr.presentation.register.RegisterViewModel
 import com.example.venturahr.presentation.splash.SplashViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -52,6 +53,10 @@ val appModule = module {
 
     viewModel {
         LoginViewModel()
+    }
+
+    viewModel {
+        RegisterViewModel()
     }
 
     factory { JobVacancyAdapter() }

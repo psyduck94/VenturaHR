@@ -27,9 +27,11 @@ class SplashActivity : AppCompatActivity() {
                     FirstTimeState.FIRST_TIME -> {
                         setNotTheUserFirstTime()
                         startActivity(IntroActivity.getIntent(this@SplashActivity))
+                        finish()
                     }
                     FirstTimeState.NOT_THE_FIRST_TIME -> {
                         startActivity(MainActivity.getIntent(this@SplashActivity))
+                        finish()
                     }
                     else -> {}
                 }
