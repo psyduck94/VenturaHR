@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import Index from '../pages/Index'
 import JobVacancyDetails from '../pages/JobVacancyDetails'
-import Cadastro from '../pages/Cadastro'
+import Cadastro from '../pages/SignUp'
 import Login from '../pages/Login'
 
 const Routes: React.FC = () => (
