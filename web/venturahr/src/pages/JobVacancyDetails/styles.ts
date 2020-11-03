@@ -50,13 +50,16 @@ export const JobVacancyInfo = styled.section`
         }
     }
 
-    ul {
-        margin-bottom: 40px;
+    table {
+        border-collapse: collapse;
+        margin-top: 16px;
+        margin-bottom: 16px;
     }
 
-    ul li {
-        margin-top: 10px;
-        margin-left: 30px;
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
     }
 
     h2 {

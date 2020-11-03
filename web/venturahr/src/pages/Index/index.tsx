@@ -9,13 +9,22 @@ import api from '../../services/api'
 
 /* Front-end da página inicial do site venturaHR (Index) */
 
+
+interface Address {
+    country?: string
+    state: string
+    city: string
+    streetName: string
+}
+
 interface JobVacancy {
     id: string
     title: string
     companyName: string
     companyLogo: string
-    city: string
+    address: Address
 }
+
 
 const Index: React.FC = () => {
 
@@ -27,6 +36,7 @@ const Index: React.FC = () => {
 
     useEffect(() => {
         api.get('jobvacancies').then(response => {
+            console.log(response.data)
             setJobVacancies(response.data)
         })
     }, [])
@@ -72,7 +82,7 @@ const Index: React.FC = () => {
                             alt="Logo da Empresa"
                             width="40px" />
                         <div>
-                            <strong>{jobVacancy.companyName} - {jobVacancy.city}</strong>
+                <strong>{jobVacancy.companyName} - {jobVacancy.address.city}</strong>
                             <p>{jobVacancy.title}</p>
                         </div>
 

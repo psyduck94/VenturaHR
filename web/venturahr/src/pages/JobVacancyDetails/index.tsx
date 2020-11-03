@@ -11,18 +11,31 @@ interface JobVacancyParams {
     id: string
 }
 
+interface Address {
+    country?: string
+    state: string
+    city: string
+    streetName: string
+}
+
+interface Criteria {
+    name: string
+    pmd: string
+    weight: string
+    description: string
+}
+
 interface JobVacancy {
     title: string
     description: string
     companyLogo: string
     companyDescription: string
     companyName: string
-    city: string
-    state: string
+    address: Address
     contractType: string
     contractDuration: string
     closingDate: string
-    criteriaList: string[]
+    criteriaList: Criteria[]
 }
 
 const JobVacancyDetails: React.FC = () => {
@@ -53,7 +66,7 @@ const JobVacancyDetails: React.FC = () => {
                         <img src={jobVacancy.companyLogo}></img>
                         <div>
                             <strong>{jobVacancy.title}</strong>
-                            <p>{jobVacancy.city}</p>
+                            <p>{jobVacancy.address.city}</p>
                         </div>
                     </header>
                     <h2>Empresa: <span>{jobVacancy.companyName}</span></h2>
@@ -62,12 +75,21 @@ const JobVacancyDetails: React.FC = () => {
                     <h2>Descrição da Vaga</h2>
                     <p>{jobVacancy.description}</p>
                     <h2>Critérios</h2>
-                    <ul>
-                        {jobVacancy.criteriaList.map(criterion => (
-                            <li>{criterion}</li>
-                        ))}
-                    </ul>
-                    <strong>Local: <span>{jobVacancy.city}, </span><span>{jobVacancy.state}</span></strong>
+                    <table>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                        </tr>
+                        <tr>
+                            {jobVacancy.criteriaList.map(criteria => (
+                                <>
+                                    <td>{criteria.name}</td>
+                                    <td>{criteria.description}</td>
+                                </>
+                            ))}
+                        </tr>
+                    </table>
+                    <strong>Local: <span>{jobVacancy.address.city}, </span><span>{jobVacancy.address.state}</span></strong>
                     <br></br>
                     <strong>Tipo de Contrato: <span>{jobVacancy.contractType}</span></strong>
                     <br></br>
