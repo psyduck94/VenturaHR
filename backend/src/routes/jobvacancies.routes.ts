@@ -3,6 +3,7 @@ import { response, Router } from 'express'
 import { parseISO } from 'date-fns'
 import JobVacancyRepository from '../repositories/JobVacancyRepository'
 import CreateJobVacancyService from '../services/CreateJobVacancyService'
+import Criteria from '../domain/models/Criteria'
 
 /* Gerenciamento de Rotas da Aplicação */
 
@@ -22,7 +23,18 @@ jobVacanciesRouter.get('/:id', async (request, response) => {
   try {
     const { params } = request
     const jobVacanciesRepository = getCustomRepository(JobVacancyRepository)
-    const jobVacancy = await jobVacanciesRepository.findOne(params)
+    const jobVacancy = await jobVacanciesRepository.findOne(params, { relations: ['criteriaList', 'address'] })
+    return response.json(jobVacancy)
+  } catch (err) {
+    return response.status(400).json({ error: err.message })
+  }
+})
+
+jobVacanciesRouter.delete('/:id', async (request, response) => {
+  try {
+    const { params } = request
+    const jobVacanciesRepository = getCustomRepository(JobVacancyRepository)
+    const jobVacancy = await jobVacanciesRepository.delete(params)
     return response.json(jobVacancy)
   } catch (err) {
     return response.status(400).json({ error: err.message })
@@ -37,11 +49,10 @@ jobVacanciesRouter.post('/', async (request, response) => {
       companyLogo,
       companyName,
       companyDescription,
-      city,
-      state,
       contractType,
       contractDuration,
       criteriaList,
+      address,
       closingDate,
     } = request.body
 
@@ -53,10 +64,9 @@ jobVacanciesRouter.post('/', async (request, response) => {
       companyLogo,
       companyName,
       companyDescription,
-      city,
-      state,
       contractType,
       contractDuration,
+      address,
       closingDate: parsedClosingDate,
       criteriaList,
     })

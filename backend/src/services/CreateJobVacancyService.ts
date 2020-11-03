@@ -1,6 +1,10 @@
 import { getCustomRepository } from 'typeorm'
 import JobVacancy from '../domain/models/JobVacancy'
 import JobVacancyRepository from '../repositories/JobVacancyRepository'
+import Criteria from '../domain/models/Criteria'
+import Address from '../domain/models/Address'
+
+/* Classe de serviço para a criação de vaga */
 
 interface Request {
   description: string
@@ -8,12 +12,11 @@ interface Request {
   companyLogo: string
   companyName: string
   companyDescription: string
-  city: string
-  state: string
   contractType: string
   contractDuration: string
   closingDate: Date
-  criteriaList: string[]
+  address: Address
+  criteriaList: Criteria[]
 }
 
 class CreateJobVacancyService {
@@ -23,11 +26,10 @@ class CreateJobVacancyService {
     companyLogo,
     companyName,
     companyDescription,
-    city,
-    state,
     contractType,
     contractDuration,
     closingDate,
+    address,
     criteriaList,
   }: Request): Promise<JobVacancy> {
     const jobVacancyRepository = getCustomRepository(JobVacancyRepository)
@@ -37,11 +39,10 @@ class CreateJobVacancyService {
       companyLogo,
       companyName,
       companyDescription,
-      city,
-      state,
       contractType,
       contractDuration,
       closingDate,
+      address,
       criteriaList,
     })
 

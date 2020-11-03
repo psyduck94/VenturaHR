@@ -1,5 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
-import { uuid } from 'uuidv4'
+import {
+  Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne,
+} from 'typeorm'
+import Address from './Address'
+
+import Criteria from './Criteria'
 
 @Entity('job_vacancies')
 class JobVacancy {
@@ -21,11 +25,9 @@ class JobVacancy {
   @Column()
   companyName: string
 
-  @Column()
-  city: string
-
-  @Column()
-  state: string
+  @OneToOne(type => Address, address => address.jobVacancy, { eager: true })
+  @JoinColumn()
+  address: Address
 
   @Column()
   contractType: string
@@ -36,8 +38,9 @@ class JobVacancy {
   @Column('timestamp with time zone')
   closingDate: Date
 
-  @Column('text', { array: true })
-  criteriaList: string[]
+  @OneToMany(type => Criteria, criteria => criteria.jobVacancy, { eager: true })
+  @JoinColumn({ name: 'criteria' })
+  criteriaList: Criteria[]
 }
 
 export default JobVacancy
