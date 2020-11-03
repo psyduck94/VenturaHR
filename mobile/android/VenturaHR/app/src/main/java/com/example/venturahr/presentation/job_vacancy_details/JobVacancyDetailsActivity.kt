@@ -38,6 +38,7 @@ class JobVacancyDetailsActivity : AppCompatActivity() {
                 when (position) {
                     0 -> tab.text = getString(R.string.tab_details)
                     1 -> tab.text = getString(R.string.tab_company)
+                    2 -> tab.text = getString(R.string.criteriaList)
                 }
             }
         tabLayoutMediator.attach()
@@ -53,8 +54,8 @@ class JobVacancyDetailsActivity : AppCompatActivity() {
             Picasso.get().load(jobVacancy.companyLogo).into(img_company_logo)
             job_title.text = jobVacancy.title
             company_name.text = jobVacancy.companyName
-            city.text = getString(R.string.format_city, jobVacancy.city)
-            state.text = jobVacancy.state
+            city.text = getString(R.string.format_city, jobVacancy.address.city)
+            state.text = jobVacancy.address.state
         }
     }
 }

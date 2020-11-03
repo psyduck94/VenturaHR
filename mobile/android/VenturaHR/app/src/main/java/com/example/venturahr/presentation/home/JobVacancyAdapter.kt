@@ -44,7 +44,7 @@ class JobVacancyAdapter : RecyclerView.Adapter<JobVacancyAdapter.JobVacancyViewH
         fun bind(jobVacancy: JobVacancy, clickListener: OnItemClickListener?) {
             Picasso.get().load(jobVacancy.companyLogo).into(companyLogo)
             title.text = jobVacancy.title
-            city.text = jobVacancy.city
+            city.text = jobVacancy.address.city
 
             itemView.setOnClickListener { clickListener?.onJobVacancyClick(jobVacancy) }
         }

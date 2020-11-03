@@ -11,10 +11,9 @@ class JobVacancy(
     val companyLogo: String,
     val companyName: String,
     val companyDescription: String,
-    val city: String,
-    val state: String,
+    val address: Address,
     val contractType: String,
     val contractDuration: String,
     val closingDate: String,
-    val criteriaList: List<String>
+    val criteriaList: List<Criteria>
 ) : Parcelable

@@ -18,6 +18,7 @@ import com.example.venturahr.presentation.home.JobVacancyAdapter
 import com.example.venturahr.presentation.intro.IntroViewModel
 import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsActivity
 import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsViewModel
+import com.example.venturahr.presentation.job_vacancy_details.fragments.criteria.CriteriaAdapter
 import com.example.venturahr.presentation.job_vacancy_details.fragments.details.DetailsViewModel
 import com.example.venturahr.presentation.login.LoginViewModel
 import com.example.venturahr.presentation.main.MainViewModel
@@ -58,6 +59,8 @@ val appModule = module {
     viewModel {
         RegisterViewModel()
     }
+
+    factory { CriteriaAdapter() }
 
     factory { JobVacancyAdapter() }
 

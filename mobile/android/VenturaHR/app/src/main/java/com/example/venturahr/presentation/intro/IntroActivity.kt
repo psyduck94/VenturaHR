@@ -23,7 +23,8 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
-        btn_sign_up.setOnClickListener { startActivity(RegisterActivity.getIntent(this)); finish() }
-        btn_no_thanks.setOnClickListener { startActivity(MainActivity.getIntent(this)); finish() }
+        btn_sign_up.setOnClickListener { startActivity(RegisterActivity.getIntent(this)) }
+        btn_no_thanks.setOnClickListener { startActivity(MainActivity.getIntent(this)) }
+        btn_navigate_to_login.setOnClickListener { startActivity(LoginActivity.getIntent(this)) }
     }
 }

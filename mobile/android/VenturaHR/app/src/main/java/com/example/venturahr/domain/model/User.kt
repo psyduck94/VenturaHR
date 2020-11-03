@@ -1,9 +1,7 @@
 package com.example.venturahr.domain.model
 
-import com.example.venturahr.domain.enums.AccountType
-
 data class User(
-    val accountType: AccountType,
+    val accountType: String,
     val name: String,
     val email: String,
     val phone: String,

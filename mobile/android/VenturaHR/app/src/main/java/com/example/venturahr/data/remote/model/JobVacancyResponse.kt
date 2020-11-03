@@ -12,10 +12,9 @@ class JobVacancyResponse(
     val companyLogo: String,
     val companyName: String,
     val companyDescription: String,
-    val city: String,
-    val state: String,
+    val address: AddressResponse,
+    val criteriaList: List<CriteriaResponse>,
     val contractType: String,
     val contractDuration: String,
     val closingDate: String,
-    val criteriaList: List<String>
 )

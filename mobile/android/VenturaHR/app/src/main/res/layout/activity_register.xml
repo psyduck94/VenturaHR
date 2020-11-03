@@ -6,7 +6,6 @@
     <!-- Arquivo XML da tela de cadastro -->
 
     <data>
-
         <variable
             name="viewModel"
             type="com.example.venturahr.presentation.register.RegisterViewModel" />
@@ -117,7 +116,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:checkedButton="@={viewModel.accountTypeInput}"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

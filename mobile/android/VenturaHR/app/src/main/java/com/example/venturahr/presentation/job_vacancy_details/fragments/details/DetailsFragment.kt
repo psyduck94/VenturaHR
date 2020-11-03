@@ -35,7 +35,6 @@ class DetailsFragment : Fragment() {
         val jobVacancy = activity?.intent?.getParcelableExtra<JobVacancy>("JOB_VACANCY")
         jobVacancy?.let {
             job_description.text = jobVacancy.description
-            criteria_list.text = viewModel.formatCriteriaList(jobVacancy.criteriaList)
             if (jobVacancy.closingDate.isEmpty()) closing_date.text = getString(R.string.empty_attribute)
             else closing_date.text = viewModel.formatClosingDate(jobVacancy.closingDate)
         }

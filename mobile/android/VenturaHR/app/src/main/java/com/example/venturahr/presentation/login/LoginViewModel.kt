@@ -21,7 +21,7 @@ class LoginViewModel : ViewModel() {
 
     private fun checkIfLoginFormIsValid(): Boolean {
         return if (emailInput.value.isNullOrEmpty() && passwordInput.value.isNullOrEmpty()) {
-            loginFormStatusLiveData.value = R.string.warning_empty_login_form
+            loginFormStatusLiveData.value = R.string.warning_invalid_form
             false
         } else true
     }

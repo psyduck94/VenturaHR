@@ -41,10 +41,15 @@
     <string name="canditade_radio_button">Candidato</string>
     <string name="company_radio_button">Empresa</string>
     <string name="admin_radio_button">Administrador</string>
-    <string name="warning_empty_login_form">Por favor, preencha todo o formulário.</string>
+    <string name="warning_invalid_form">Por favor, preencha todo o formulário.</string>
     <string name="state_title">Estado</string>
     <string name="cpf_hint">CPF</string>
     <string name="btn_confirm_form">CONFIRMAR</string>
+    <string name="name_title">Nome</string>
+    <string name="pmd_title">PMD:</string>
+    <string name="weight_title">Peso:</string>
+    <string name="description_title">Descrição</string>
+    <string name="criteriaList">Requisitos</string>
 
 
     <string-array name="brazilian_states">

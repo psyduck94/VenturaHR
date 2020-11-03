@@ -28,6 +28,7 @@ class RegisterActivity : AppCompatActivity() {
         initBindingConfig()
 
         initStatesSpinner()
+        btn_confirm_form.setOnClickListener { viewModel.saveUserToRemoteDatabase() }
     }
 
     private fun initBindingConfig() {
@@ -43,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            states_spinner.adapter = adapter
+            binding.statesSpinner.adapter = adapter
         }
     }
 
