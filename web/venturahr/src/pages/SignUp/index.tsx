@@ -54,7 +54,7 @@ const SignUp: React.FC = () => {
                         <h2>Faça seu cadastro</h2>
                         <RadioGroup>
                             <input type="radio" value="Empresa" name="accountType" /> Empresa
-                            <input checked="checked" type="radio" value="Candidato" name="accountType" /> Candidato
+                            <input checked type="radio" value="Candidato" name="accountType" /> Candidato
                         </RadioGroup>
 
                         <Input name="name" icon={FiUser} placeholder="Nome" />
