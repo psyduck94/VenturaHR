@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import logo from '../../assets/app_logo.jpg'
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
 import {
@@ -8,6 +8,7 @@ import {
 } from './styles'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
+import { Form } from '@unform/web'
 
 /* Classe responsável pela UI da página de Login */
 
@@ -17,13 +18,13 @@ const Login: React.FC = () => {
             <Container>
                 <Content>
                     <img src={logo} alt="Logo da Empresa" width="150" />
-                    <form>
+                    <Form>
                         <h2>Faça seu login</h2>
                         <Input name="email" icon={FiMail} placeholder="E-mail" />
-                        <Input name="password" icon={FiLock} placeholder="Senha" type="password" />
+                        <Input name="password"  icon={FiLock} placeholder="Senha" type="password" />
                         <Button type="submit">Entrar</Button>
                         <a href="forgot">Esqueci minha senha</a>
-                    </form>
+                    </Form>
                     <a href="">
                         <FiLogIn />
                         Criar conta

@@ -26,6 +26,7 @@ interface Criteria {
 }
 
 interface JobVacancy {
+    id: string
     title: string
     description: string
     companyLogo: string
@@ -48,8 +49,6 @@ const JobVacancyDetails: React.FC = () => {
             setJobVacancy(response.data)
         })
     }, [params.id])
-
-    console.log('jobVacancy state: ', jobVacancy)
 
     return (
         <>
@@ -76,18 +75,20 @@ const JobVacancyDetails: React.FC = () => {
                     <p>{jobVacancy.description}</p>
                     <h2>Critérios</h2>
                     <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Descrição</th>
-                        </tr>
-                        <tr>
-                            {jobVacancy.criteriaList.map(criteria => (
-                                <>
+                        <tbody>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                            </tr>
+                            <tr>
+                                {jobVacancy.criteriaList.map(criteria => (
+                                    <>
                                     <td>{criteria.name}</td>
                                     <td>{criteria.description}</td>
-                                </>
-                            ))}
-                        </tr>
+                                    </>
+                                ))}
+                            </tr>
+                        </tbody>
                     </table>
                     <strong>Local: <span>{jobVacancy.address.city}, </span><span>{jobVacancy.address.state}</span></strong>
                     <br></br>

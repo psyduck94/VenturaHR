@@ -10,17 +10,23 @@ import {
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { Link } from 'react-router-dom'
+import { Form } from '@unform/web'
 
 /* Classe responsável pela UI da página de Login */
 
 const SignUp: React.FC = () => {
+
+    function handleSubmit(data: object): void {
+        console.log(data)
+    }
+
     return (
         <>
             <Container>
             <Background />
                 <Content>
                     <img src={logo} alt="Logo da Empresa" width="150" />
-                    <form>
+                    <Form onSubmit={handleSubmit}>
                         <h2>Faça seu cadastro</h2>
                         <Input name="name" icon={FiUser} placeholder="Nome" />
                         <Input name="email" icon={FiMail} placeholder="E-mail" />
@@ -30,12 +36,10 @@ const SignUp: React.FC = () => {
                         <Input name="city" icon={MdLocationOn} placeholder="Cidade" />
                         <Input name="state" icon={MdLocationOn} placeholder="Estado" />
                         <Button type="submit">Cadastrar</Button>
-                    </form>
+                    </Form>
                     <Link to="/">
-                    <a href="">
                         <FiArrowLeft />
                         Voltar para a página principal
-                    </a>
                     </Link>
                 </Content>
             </Container>
