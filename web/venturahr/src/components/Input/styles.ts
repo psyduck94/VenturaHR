@@ -1,8 +1,13 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 /* Arquivo de estilização do componente Input */
 
-export const Container = styled.div`
+interface ContainerProps {
+    isFocused: boolean
+    isFilled: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
 
     background: #ededed;
     border-radius: 10px;
@@ -14,12 +19,25 @@ export const Container = styled.div`
 
     & + div {
         margin-top: 8px;
-        }
+    }
 
-input {
-    flex: 1;
-    border: 0;
-    background: transparent;
+    ${(props) =>
+     props.isFocused &&
+      css`
+        color: #e5340a;
+        border-color: #e5340a;
+    `}
+
+    ${(props) =>
+     props.isFilled &&
+      css`
+        color: #e5340a;
+    `}
+
+    input {
+        flex: 1;
+        border: 0;
+        background: transparent;
     }
 
     svg {

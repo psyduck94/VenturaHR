@@ -13,12 +13,17 @@ import { Form } from '@unform/web'
 /* Classe responsável pela UI da página de Login */
 
 const Login: React.FC = () => {
+
+    function handleSubmit(data: object): void {
+        console.log(data)
+    }
+
     return (
         <>
             <Container>
                 <Content>
                     <img src={logo} alt="Logo da Empresa" width="150" />
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <h2>Faça seu login</h2>
                         <Input name="email" icon={FiMail} placeholder="E-mail" />
                         <Input name="password"  icon={FiLock} placeholder="Senha" type="password" />
