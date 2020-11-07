@@ -1,33 +1,56 @@
-import React, { useState, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import logo from '../../assets/app_logo.jpg'
 import { FiArrowLeft, FiMail, FiLock, FiUser, FiPhone, FiCreditCard } from 'react-icons/fi'
 import { MdLocationOn } from 'react-icons/md'
 import {
     Container,
     Content,
-    Background
+    Background,
+    RadioGroup,
 } from './styles'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { Link } from 'react-router-dom'
 import { Form } from '@unform/web'
+import * as Yup from 'yup'
 
 /* Classe responsável pela UI da página de Login */
 
 const SignUp: React.FC = () => {
 
-    function handleSubmit(data: object): void {
-        console.log(data)
-    }
+    const handleSubmit = useCallback(async (data: object) => {
+        try {
+            const schema = Yup.object().shape({
+                name: Yup.string().required('Nome obrigatório'),
+                email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail valido'),
+                password: Yup.string().required('Senha obrigatório').min(6, 'Mínimo de 6 dígitos'),
+                cpfOrCnpj: Yup.string().required('CPF ou CPNJ obrigatório').min(11).max(11),
+                phone: Yup.string().required('Telefone obrigatório').min(8),
+                city: Yup.string().required('Cidade Obrigatório'),
+                state: Yup.string().required('Estado obrigatório'),
+            })
+
+            await schema.validate(data, {
+                abortEarly: false,
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }, [])
 
     return (
         <>
             <Container>
-            <Background />
+                <Background />
                 <Content>
                     <img src={logo} alt="Logo da Empresa" width="150" />
                     <Form onSubmit={handleSubmit}>
                         <h2>Faça seu cadastro</h2>
+                        <RadioGroup>
+                            <input type="radio" value="Empresa" name="accountType" /> Empresa
+                            <input type="radio" value="Candidato" name="accountType" /> Candidato
+                        </RadioGroup>
+
                         <Input name="name" icon={FiUser} placeholder="Nome" />
                         <Input name="email" icon={FiMail} placeholder="E-mail" />
                         <Input name="password" icon={FiLock} placeholder="Senha" type="password" />

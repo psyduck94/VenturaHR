@@ -11,6 +11,15 @@ export const Container = styled.div`
     align-items: stretch;
 `
 
+export const RadioGroup = styled.div`
+    margin-bottom: 16px;
+
+    input[type="radio"] {
+        margin: 0 10px;
+        color: #ededed
+    }
+`
+
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
