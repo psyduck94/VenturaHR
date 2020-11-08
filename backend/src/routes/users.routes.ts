@@ -1,12 +1,14 @@
 /* Arquivo que representa o endpoint de usuários */
 
-import { getCustomRepository, getRepository } from 'typeorm'
-import { response, Router } from 'express'
+import { getRepository } from 'typeorm'
+import { Router } from 'express'
 import CreateUserService from '../services/CreateUserService'
 import User from '../domain/models/User'
 import AccountType from '../domain/enums/AccountType'
+import ensureAuthentication from '../middlewares/ensureAuthentication'
 
 const usersRouter = Router()
+usersRouter.use(ensureAuthentication)
 
 usersRouter.get('/', async (request, response) => {
   try {

@@ -5,6 +5,7 @@ import { getRepository } from 'typeorm'
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import User from '../domain/models/User'
+import authConfig from '../config/auth'
 
 interface Response {
   user: User
@@ -26,9 +27,11 @@ class AuthenticateUserService {
     const matchedPassword = await compare(password, user.password)
     if (!matchedPassword) throw new Error('Incorrect credentials')
 
-    const token = sign({}, '2fea75c81a95743256f392d2159ec929', {
+    const { secret, expiresIn } = authConfig.jwt
+
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn,
     })
 
     return { user, token }
