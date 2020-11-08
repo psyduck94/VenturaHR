@@ -1,10 +1,14 @@
+/* Serviço de autenticação de usuário */
+
 import { compareAsc } from 'date-fns'
 import { getRepository } from 'typeorm'
 import { compare } from 'bcryptjs'
+import { sign } from 'jsonwebtoken'
 import User from '../domain/models/User'
 
 interface Response {
   user: User
+  token: string
 }
 
 interface Request {
@@ -22,7 +26,12 @@ class AuthenticateUserService {
     const matchedPassword = await compare(password, user.password)
     if (!matchedPassword) throw new Error('Incorrect credentials')
 
-    return { user }
+    const token = sign({}, '2fea75c81a95743256f392d2159ec929', {
+      subject: user.id,
+      expiresIn: '1d',
+    })
+
+    return { user, token }
   }
 }
 
