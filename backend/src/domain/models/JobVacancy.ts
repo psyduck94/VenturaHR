@@ -1,9 +1,10 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne,
+  Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne, ManyToOne,
 } from 'typeorm'
 import Address from './Address'
 
 import Criteria from './Criteria'
+import User from './User'
 
 @Entity('job_vacancies')
 class JobVacancy {
@@ -37,6 +38,9 @@ class JobVacancy {
 
   @Column('timestamp with time zone')
   closingDate: Date
+
+  @ManyToOne(type => User, user => user.publishedJobs)
+  company: User
 
   @OneToMany(type => Criteria, criteria => criteria.jobVacancy, { eager: true })
   @JoinColumn({ name: 'criteria' })

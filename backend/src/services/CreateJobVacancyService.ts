@@ -3,6 +3,7 @@ import JobVacancy from '../domain/models/JobVacancy'
 import JobVacancyRepository from '../repositories/JobVacancyRepository'
 import Criteria from '../domain/models/Criteria'
 import Address from '../domain/models/Address'
+import User from '../domain/models/User'
 
 /* Classe de serviço para a criação de vaga */
 
@@ -16,6 +17,7 @@ interface Request {
   contractDuration: string
   closingDate: Date
   address: Address
+  company: User
   criteriaList: Criteria[]
 }
 
@@ -28,6 +30,7 @@ class CreateJobVacancyService {
     companyDescription,
     contractType,
     contractDuration,
+    company,
     closingDate,
     address,
     criteriaList,
@@ -42,6 +45,7 @@ class CreateJobVacancyService {
       contractType,
       contractDuration,
       closingDate,
+      company,
       address,
       criteriaList,
     })

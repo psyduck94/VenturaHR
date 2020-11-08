@@ -52,6 +52,7 @@ jobVacanciesRouter.post('/', async (request, response) => {
       contractType,
       contractDuration,
       criteriaList,
+      company,
       address,
       closingDate,
     } = request.body
@@ -66,6 +67,7 @@ jobVacanciesRouter.post('/', async (request, response) => {
       companyDescription,
       contractType,
       contractDuration,
+      company,
       address,
       closingDate: parsedClosingDate,
       criteriaList,

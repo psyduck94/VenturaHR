@@ -1,7 +1,15 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn,
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm'
 import AccountType from '../enums/AccountType'
+import JobVacancy from './JobVacancy'
 
 @Entity('users')
 class User {
@@ -34,6 +42,10 @@ class User {
 
   @Column()
   cnpj: string
+
+  @OneToMany(type => JobVacancy, user => user.company)
+  @JoinColumn({ name: 'job_vacancies' })
+  publishedJobs: JobVacancy[] | null
 
   @CreateDateColumn()
   createdAt: Date
