@@ -1,9 +1,9 @@
-import { getRepository } from 'typeorm'
-import AccountType from '../domain/enums/AccountType'
-
-import User from '../domain/models/User'
-
 /* Classe que representa o service de criação de usuário */
+
+import { getRepository } from 'typeorm'
+import { hash } from 'bcryptjs'
+import AccountType from '../domain/enums/AccountType'
+import User from '../domain/models/User'
 
 interface Request {
   accountType: AccountType
@@ -36,11 +36,13 @@ class CreateUserService {
 
     if (checkIfUserExists) throw new Error('Endereço de e-mail já cadastrado')
 
+    const hashedPassword = await hash(password, 8)
+
     const user = usersRepository.create({
       accountType,
       name,
       email,
-      password,
+      password: hashedPassword,
       phone,
       state,
       city,

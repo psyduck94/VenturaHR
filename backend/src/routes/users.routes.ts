@@ -1,10 +1,10 @@
+/* Arquivo que representa o endpoint de usuários */
+
 import { getCustomRepository, getRepository } from 'typeorm'
 import { response, Router } from 'express'
 import CreateUserService from '../services/CreateUserService'
 import User from '../domain/models/User'
 import AccountType from '../domain/enums/AccountType'
-
-/* Arquivo que representa o endpoint de usuários */
 
 const usersRouter = Router()
 
