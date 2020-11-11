@@ -1,21 +1,26 @@
 /* Arquivo que representa o componente Toast na aplicação */
 
 import React from 'react'
+import { useTransition } from 'react-spring'
 import { Container } from './styles'
 import Toast from './Toast'
-import { ToastMessage, useToast } from '../../hooks/toast'
+import { ToastMessage } from '../../hooks/toast'
 
 interface ToastContainerProps {
     messages: ToastMessage[]
 }
 
 const ToastContainer: React.FC<ToastContainerProps> = ({ messages }) => {
-    const { removeToast } = useToast()
+    const messagesWithTransitions = useTransition(messages, message=> message.id, {
+        from: { right: '-100%', opacity: 0 },
+        enter: { right: '0%', opacity: 1 },
+        leave: { right: '-100%', opacity: 0 },
+    })
 
     return (
         <Container>
-            {messages.map(message => (
-                <Toast key={message.id} message={message} />
+            {messagesWithTransitions.map(({item, key, props}) => (
+                <Toast key={key} style={props} message={item} />
             ))}
         </Container>
     )
