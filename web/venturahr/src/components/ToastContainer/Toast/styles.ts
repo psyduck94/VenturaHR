@@ -1,19 +1,9 @@
-/* Arquivo que representa a estilização do componente Toast */
-
 import styled, { css } from 'styled-components'
 
-interface ToastProps {
+interface ContainerProps {
     type?: 'success' | 'error' | 'info'
     hasDescription: boolean
 }
-
-export const Container = styled.div`
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 30px;
-    overflow: hidden
-`
 
 const toastTypeVarations = {
     info: css`
@@ -30,9 +20,7 @@ const toastTypeVarations = {
     `
 }
 
-
-
-export const Toast = styled.div<ToastProps>`
+export const Container = styled.div<ContainerProps>`
     width: 360px;
     position: relative;
     padding: 16px 30px 16px 16px;
