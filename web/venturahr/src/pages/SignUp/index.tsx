@@ -1,11 +1,12 @@
 import React, { useCallback, useRef } from 'react'
-import { FormHandles} from '@unform/core'
+import { FormHandles } from '@unform/core'
 import logo from '../../assets/app_logo.jpg'
 import { FiArrowLeft, FiMail, FiLock, FiUser, FiPhone, FiCreditCard } from 'react-icons/fi'
 import { MdLocationOn } from 'react-icons/md'
 import {
     Container,
     Content,
+    AnimationContainer,
     Background,
     RadioGroup,
 } from './styles'
@@ -49,27 +50,29 @@ const SignUp: React.FC = () => {
             <Container>
                 <Background />
                 <Content>
-                    <img src={logo} alt="Logo da Empresa" width="150" />
-                    <Form ref={formRef} onSubmit={handleSubmit}>
-                        <h2>Faça seu cadastro</h2>
-                        <RadioGroup>
-                            <input type="radio" value="Empresa" name="accountType" /> Empresa
+                    <AnimationContainer>
+                        <img src={logo} alt="Logo da Empresa" width="150" />
+                        <Form ref={formRef} onSubmit={handleSubmit}>
+                            <h2>Faça seu cadastro</h2>
+                            <RadioGroup>
+                                <input type="radio" value="Empresa" name="accountType" /> Empresa
                             <input checked type="radio" value="Candidato" name="accountType" /> Candidato
                         </RadioGroup>
 
-                        <Input name="name" icon={FiUser} placeholder="Nome" />
-                        <Input name="email" icon={FiMail} placeholder="E-mail" />
-                        <Input name="password" icon={FiLock} placeholder="Senha" type="password" />
-                        <Input name="cpfOrCnpj" icon={FiCreditCard} placeholder="CPF ou CPNJ" />
-                        <Input name="phone" icon={FiPhone} placeholder="Telefone" />
-                        <Input name="city" icon={MdLocationOn} placeholder="Cidade" />
-                        <Input name="state" icon={MdLocationOn} placeholder="Estado" />
-                        <Button type="submit">Cadastrar</Button>
-                    </Form>
-                    <Link to="/">
-                        <FiArrowLeft />
+                            <Input name="name" icon={FiUser} placeholder="Nome" />
+                            <Input name="email" icon={FiMail} placeholder="E-mail" />
+                            <Input name="password" icon={FiLock} placeholder="Senha" type="password" />
+                            <Input name="cpfOrCnpj" icon={FiCreditCard} placeholder="CPF ou CPNJ" />
+                            <Input name="phone" icon={FiPhone} placeholder="Telefone" />
+                            <Input name="city" icon={MdLocationOn} placeholder="Cidade" />
+                            <Input name="state" icon={MdLocationOn} placeholder="Estado" />
+                            <Button type="submit">Cadastrar</Button>
+                        </Form>
+                        <Link to="/">
+                            <FiArrowLeft />
                         Voltar para a página principal
                     </Link>
+                    </AnimationContainer>
                 </Content>
             </Container>
         </>
