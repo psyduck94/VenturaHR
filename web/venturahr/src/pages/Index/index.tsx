@@ -36,7 +36,6 @@ const Index: React.FC = () => {
 
     useEffect(() => {
         api.get('jobvacancies').then(response => {
-            console.log(response.data)
             setJobVacancies(response.data)
         })
     }, [])
