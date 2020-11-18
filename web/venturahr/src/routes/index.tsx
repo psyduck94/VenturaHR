@@ -14,7 +14,7 @@ const Routes: React.FC = () => (
         <Route path="/jobvacancies/:id+" component={JobVacancyDetails} />
         <Route path="/cadastro" component={Cadastro} />
         <Route path="/login" component={Login} />
-        <Route path="/company-index" component={CompanyIndex} isPrivate />
+        <Route path="/company/index" component={CompanyIndex} isPrivate />
     </Switch>
 )
 

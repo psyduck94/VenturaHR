@@ -45,7 +45,7 @@ const Login: React.FC = () => {
 
             await signIn({ email: data.email, password: data.password })
 
-            history.push('/company-index')
+            history.push('/company/index')
 
         } catch (err) {
 

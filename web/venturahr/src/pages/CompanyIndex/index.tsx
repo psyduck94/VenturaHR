@@ -1,13 +1,14 @@
 /* Arquivo que representa a interface da página inicial de Empresa */
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import User from '../../utils/User'
 import logo from '../../assets/venturahrlogo.jpg'
 import Button from '../../components/Button'
 import { Header, NavBar, MainContainer, JobVacancies } from './styles'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { FiChevronRight } from 'react-icons/fi'
 import api from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 interface Address {
     country?: string
@@ -25,6 +26,13 @@ interface JobVacancy {
 }
 
 const CompanyIndex: React.FC = () => {
+    const { signOut } = useAuth()
+    const history = useHistory()
+
+    const handleSignOut = useCallback(() => {
+        signOut()
+        history.push('/')
+    }, [signOut])
 
     const [company] = useState<User>(() => {
         const user = localStorage.getItem('@VenturaHR:user')
@@ -45,7 +53,7 @@ const CompanyIndex: React.FC = () => {
                 <img src={logo} alt="venturahr logo" width="80"></img>
                 <NavBar>
                     <ul>
-                        <li><Link to='/'>Sair</Link></li>
+                        <li><a onClick={handleSignOut}>Sair</a></li>
                     </ul>
                 </NavBar>
             </Header>
