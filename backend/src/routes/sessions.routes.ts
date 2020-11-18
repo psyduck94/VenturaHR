@@ -1,6 +1,6 @@
 /* Rota relacionada sessões de usuário */
 
-import { response, Router } from 'express'
+import { Router } from 'express'
 import AuthenticateUserService from '../services/AuthenticateUserService'
 
 const sessionsRouter = Router()

@@ -5,10 +5,9 @@ import { Router } from 'express'
 import CreateUserService from '../services/CreateUserService'
 import User from '../domain/models/User'
 import AccountType from '../domain/enums/AccountType'
-import ensureAuthentication from '../middlewares/ensureAuthentication'
+import AuthenticateUserService from '../services/AuthenticateUserService'
 
 const usersRouter = Router()
-usersRouter.use(ensureAuthentication)
 
 usersRouter.get('/', async (request, response) => {
   try {
@@ -64,9 +63,12 @@ usersRouter.post('/', async (request, response) => {
       cnpj,
     })
 
+    const authenticateUser = new AuthenticateUserService()
+    await authenticateUser.execute({ email, password })
+
     return response.json(user)
   } catch (err) {
-    return response.status(400).json({ error: err.message })
+    return response.status(400).json({ error: err.message, description: err })
   }
 })
 
