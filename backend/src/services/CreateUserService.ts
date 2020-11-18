@@ -50,8 +50,6 @@ class CreateUserService {
       cnpj,
     })
 
-    delete user.password
-
     await usersRepository.save(user)
     return user
   }

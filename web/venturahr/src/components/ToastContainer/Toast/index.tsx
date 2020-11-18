@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Container } from './styles'
 import { FiAlertCircle, FiInfo, FiXCircle, FiCheckCircle } from 'react-icons/fi'
 import { ToastMessage, useToast } from '../../../hooks/toast'
-import { clearTimeout } from 'timers'
 
 interface ToastProps {
     message: ToastMessage

@@ -1,6 +1,6 @@
 /* Classe responsável pela UI da página de Login */
 
-import React, { useRef, useCallback, useContext } from 'react'
+import React, { useRef, useCallback } from 'react'
 import * as Yup from 'yup'
 import logo from '../../assets/app_logo.jpg'
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
@@ -17,7 +17,7 @@ import { Form } from '@unform/web'
 import getValidationErrors from '../../utils/getValidationErrors'
 import { useAuth } from '../../hooks/auth'
 import { useToast } from '../../hooks/toast'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 interface SignInFormData {
     email: string,
@@ -26,8 +26,9 @@ interface SignInFormData {
 
 const Login: React.FC = () => {
     const formRef = useRef<FormHandles>(null)
-    const { user, signIn } = useAuth()
+    const { signIn } = useAuth()
     const { addToast } = useToast()
+    const history = useHistory()
 
     const handleSubmit = useCallback(async (data: SignInFormData) => {
         try {
@@ -43,6 +44,9 @@ const Login: React.FC = () => {
             })
 
             await signIn({ email: data.email, password: data.password })
+
+            history.push('/company-index')
+
         } catch (err) {
 
             if (err instanceof Yup.ValidationError) {
@@ -56,7 +60,7 @@ const Login: React.FC = () => {
                 description: 'Erro ao fazer login, verifique as credencias novamente. '
             })
         }
-    }, [signIn, addToast])
+    }, [signIn, addToast, history])
 
     return (
         <>

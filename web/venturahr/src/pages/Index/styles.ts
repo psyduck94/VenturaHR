@@ -20,8 +20,6 @@ export const Header = styled.header`
         border: none;
         border-radius: 10px;
     }
-
-
 `
 export const NavBar = styled.nav`
 

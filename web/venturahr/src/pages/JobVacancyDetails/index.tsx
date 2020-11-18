@@ -62,7 +62,7 @@ const JobVacancyDetails: React.FC = () => {
             { jobVacancy ? (
                 <JobVacancyInfo>
                     <header>
-                        <img src={jobVacancy.companyLogo}></img>
+                        <img alt="Logo da Empresa" src={jobVacancy.companyLogo}></img>
                         <div>
                             <strong>{jobVacancy.title}</strong>
                             <p>{jobVacancy.address.city}</p>
@@ -83,8 +83,8 @@ const JobVacancyDetails: React.FC = () => {
                             <tr>
                                 {jobVacancy.criteriaList.map(criteria => (
                                     <>
-                                    <td>{criteria.name}</td>
-                                    <td>{criteria.description}</td>
+                                        <td>{criteria.name}</td>
+                                        <td>{criteria.description}</td>
                                     </>
                                 ))}
                             </tr>

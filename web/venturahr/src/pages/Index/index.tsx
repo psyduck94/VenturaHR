@@ -50,8 +50,8 @@ const Index: React.FC = () => {
                 <img src={logo} alt="venturahr logo" width="80"></img>
                 <NavBar>
                     <ul>
-                        <li><a href="#">Início</a></li>
-                        <li><a href="#">Sobre</a></li>
+                        <li><Link to='/'>Início</Link></li>
+                        <li><Link to='/'>Sobre</Link></li>
                         <li><Link to='/login'>Entrar</Link></li>
                     </ul>
                 </NavBar>
@@ -67,7 +67,7 @@ const Index: React.FC = () => {
                         <button type="submit">Pesquisar</button>
                     </Form>
                 </div>
-                <img src={person} width="400"></img>
+                <img alt='Imagem de uma pessoa trabalhando' src={person} width="400"></img>
             </MainContainer>
 
             <Tutorial src={tutorial}></Tutorial>
@@ -81,7 +81,7 @@ const Index: React.FC = () => {
                             alt="Logo da Empresa"
                             width="40px" />
                         <div>
-                <strong>{jobVacancy.companyName} - {jobVacancy.address.city}</strong>
+                            <strong>{jobVacancy.companyName} - {jobVacancy.address.city}</strong>
                             <p>{jobVacancy.title}</p>
                         </div>
 

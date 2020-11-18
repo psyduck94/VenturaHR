@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useCallback, useState } from 'react'
 import ToastContainer from '../components/ToastContainer'
 import { uuid } from 'uuidv4'
-import { Toast } from '../components/ToastContainer/styles'
 
 export interface ToastMessage {
     id: string
@@ -33,7 +32,7 @@ const ToastProvider: React.FC = ({children}) => {
     }, [])
 
     const removeToast = useCallback((id: string) => {
-        setMessages(state => state.filter(message => message.id != id))
+        setMessages(state => state.filter(message => message.id !== id))
     }, [])
 
     return (

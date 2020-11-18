@@ -2,7 +2,6 @@ import React, { InputHTMLAttributes, useEffect, useRef, useState, useCallback } 
 import { IconBaseProps } from 'react-icons'
 import { FiAlertCircle } from 'react-icons/fi'
 import { Container, Error } from './styles'
-import Tooltip from '../Tooltip'
 import { useField } from '@unform/core'
 
 /* Arquivo que representa o componente Input */
