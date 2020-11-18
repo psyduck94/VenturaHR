@@ -25,7 +25,7 @@ interface JobVacancy {
     address: Address
 }
 
-const CompanyIndex: React.FC = () => {
+const CompanyIndex: React.FC = (...rest) => {
     const { signOut } = useAuth()
     const history = useHistory()
 
@@ -77,8 +77,9 @@ const CompanyIndex: React.FC = () => {
                             <FiChevronRight size={20}></FiChevronRight>
                         </Link>
                     ))}
+
                     <div className="button">
-                        <Button>PUBLICAR VAGA</Button>
+                        <Button onClick={() => history.push('/company/create-job')}>PUBLICAR VAGA</Button>
                     </div>
 
                 </JobVacancies>

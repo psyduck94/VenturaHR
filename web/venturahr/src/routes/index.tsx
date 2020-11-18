@@ -1,3 +1,5 @@
+/* Rotas da aplicação */
+
 import React from 'react'
 import { Switch } from 'react-router-dom'
 import Route from './Route'
@@ -7,6 +9,7 @@ import JobVacancyDetails from '../pages/JobVacancyDetails'
 import Cadastro from '../pages/SignUp'
 import Login from '../pages/Login'
 import CompanyIndex from '../pages/CompanyIndex'
+import CompanyCreateJob from '../pages/CompanyCreateJob'
 
 const Routes: React.FC = () => (
     <Switch>
@@ -15,6 +18,7 @@ const Routes: React.FC = () => (
         <Route path="/cadastro" component={Cadastro} />
         <Route path="/login" component={Login} />
         <Route path="/company/index" component={CompanyIndex} isPrivate />
+        <Route path="/company/create-job" component={CompanyCreateJob} isPrivate />
     </Switch>
 )
 
