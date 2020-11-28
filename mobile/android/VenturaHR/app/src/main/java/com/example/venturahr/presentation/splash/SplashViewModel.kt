@@ -6,21 +6,20 @@ import androidx.lifecycle.ViewModel
 import com.example.venturahr.domain.enums.FirstTimeState
 import com.example.venturahr.domain.usecases.IsUserFirstTime
 import com.example.venturahr.domain.usecases.SetItsNotTheUsersFirstTime
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashViewModel(
     private val isUserFirstTime: IsUserFirstTime,
-    private val setItsNotTheUsersFirstTime: SetItsNotTheUsersFirstTime
+    private val setItsNotTheUsersFirstTime: SetItsNotTheUsersFirstTime,
+    private val firebaseAuth: FirebaseAuth
 ) : ViewModel() {
 
-    private val isItTheUsersFirstTimeLiveData = MutableLiveData<FirstTimeState>()
-    val isItTheUsersFirstTime: LiveData<FirstTimeState> = isItTheUsersFirstTimeLiveData
+    private val hasTheUserAlreadyLoggedInLiveData = MutableLiveData<Boolean>()
+    val hasTheUserAlreadyLoggedIn: LiveData<Boolean> = hasTheUserAlreadyLoggedInLiveData
 
-    fun verifyIfItsTheUsersFirstTime() {
-        val firstTime = isUserFirstTime()
-        if (firstTime) isItTheUsersFirstTimeLiveData.postValue(FirstTimeState.FIRST_TIME)
-        else isItTheUsersFirstTimeLiveData.postValue(FirstTimeState.NOT_THE_FIRST_TIME)
+    fun checkIfUserHasAlreadyLoggedIn() {
+        val user = firebaseAuth.currentUser
+        val hasTheUserAlreadyLoggedIn = user != null
+        hasTheUserAlreadyLoggedInLiveData.value = hasTheUserAlreadyLoggedIn
     }
-
-    fun setNotTheUserFirstTime() = setItsNotTheUsersFirstTime()
-
 }

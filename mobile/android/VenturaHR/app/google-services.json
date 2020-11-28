@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "343949951983",
+    "firebase_url": "https://venturahr-cbf66.firebaseio.com",
+    "project_id": "venturahr-cbf66",
+    "storage_bucket": "venturahr-cbf66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343949951983:android:3ce75b46512d3330bdec1a",
+        "android_client_info": {
+          "package_name": "com.example.venturahr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343949951983-8gickc6db5tq33gul08g5hb8f5fnf65i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKCwc13d-NAIL5GUtsI4bTybiNkE4k5Xg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343949951983-8gickc6db5tq33gul08g5hb8f5fnf65i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

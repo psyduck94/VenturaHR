@@ -3,9 +3,9 @@ package com.example.venturahr.presentation.splash
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.example.venturahr.domain.enums.FirstTimeState
-import com.example.venturahr.presentation.intro.IntroActivity
+import com.example.venturahr.presentation.login.LoginActivity
 import com.example.venturahr.presentation.main.MainActivity
+import kotlinx.android.synthetic.main.activity_job_vacancy_details.*
 import org.koin.android.ext.android.inject
 
 class SplashActivity : AppCompatActivity() {
@@ -17,25 +17,18 @@ class SplashActivity : AppCompatActivity() {
 
         initViewModelObservers()
 
-        viewModel.verifyIfItsTheUsersFirstTime()
+        viewModel.checkIfUserHasAlreadyLoggedIn()
     }
 
     private fun initViewModelObservers() {
         viewModel.apply {
-            isItTheUsersFirstTime.observe(this@SplashActivity, Observer { firstTimeState ->
-                when (firstTimeState) {
-                    FirstTimeState.FIRST_TIME -> {
-                        setNotTheUserFirstTime()
-                        startActivity(IntroActivity.getIntent(this@SplashActivity))
-                        finish()
-                    }
-                    FirstTimeState.NOT_THE_FIRST_TIME -> {
-                        startActivity(MainActivity.getIntent(this@SplashActivity))
-                        finish()
-                    }
-                    else -> {}
+            hasTheUserAlreadyLoggedIn.observe(this@SplashActivity, Observer {
+                when (it) {
+                    true -> startActivity(MainActivity.getIntent(this@SplashActivity))
+                    false -> startActivity(LoginActivity.getIntent(this@SplashActivity))
                 }
             })
         }
+
     }
 }

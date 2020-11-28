@@ -6,17 +6,18 @@ import com.example.venturahr.data.local.cache.UserFirstTimeCache
 import com.example.venturahr.data.local.repository.UserFirstTimeRepositoryImpl
 import com.example.venturahr.data.remote.service.VenturaHrService
 import com.example.venturahr.data.remote.repository.JobVacancyRepositoryImpl
+import com.example.venturahr.data.remote.repository.UserRepositoryImpl
 import com.example.venturahr.domain.repository.JobVacancyRepository
 import com.example.venturahr.domain.repository.UserFirstTimeRepository
+import com.example.venturahr.domain.repository.UserRepository
 import com.example.venturahr.domain.usecases.IsUserFirstTime
 import com.example.venturahr.domain.usecases.ListJobVacanciesFromApi
+import com.example.venturahr.domain.usecases.SaveUserToRemoteDatabase
 import com.example.venturahr.domain.usecases.SetItsNotTheUsersFirstTime
 import com.example.venturahr.presentation.account.AccountViewModel
 import com.example.venturahr.presentation.bookmarks.BookmarksViewModel
 import com.example.venturahr.presentation.home.HomeViewModel
 import com.example.venturahr.presentation.home.JobVacancyAdapter
-import com.example.venturahr.presentation.intro.IntroViewModel
-import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsActivity
 import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsViewModel
 import com.example.venturahr.presentation.job_vacancy_details.fragments.criteria.CriteriaAdapter
 import com.example.venturahr.presentation.job_vacancy_details.fragments.details.DetailsViewModel
@@ -24,6 +25,7 @@ import com.example.venturahr.presentation.login.LoginViewModel
 import com.example.venturahr.presentation.main.MainViewModel
 import com.example.venturahr.presentation.register.RegisterViewModel
 import com.example.venturahr.presentation.splash.SplashViewModel
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -40,7 +42,8 @@ val appModule = module {
     viewModel {
         SplashViewModel(
             get<IsUserFirstTime>(),
-            get<SetItsNotTheUsersFirstTime>()
+            get<SetItsNotTheUsersFirstTime>(),
+            FirebaseAuth.getInstance()
         )
     }
 
@@ -57,14 +60,15 @@ val appModule = module {
     }
 
     viewModel {
-        RegisterViewModel()
+        RegisterViewModel(
+            get<SaveUserToRemoteDatabase>(),
+            FirebaseAuth.getInstance()
+        )
     }
 
     factory { CriteriaAdapter() }
 
     factory { JobVacancyAdapter() }
-
-    viewModel { IntroViewModel() }
 
     viewModel { HomeViewModel(get()) }
 
@@ -73,6 +77,8 @@ val appModule = module {
     viewModel { AccountViewModel() }
 
     viewModel { MainViewModel() }
+
+    factory { SaveUserToRemoteDatabase(get()) }
 
     factory { IsUserFirstTime(get()) }
 
@@ -84,6 +90,12 @@ val appModule = module {
         UserFirstTimeRepositoryImpl(
             get<UserFirstTimeCache>()
         ) as UserFirstTimeRepository
+    }
+
+    factory {
+        UserRepositoryImpl(
+            get<VenturaHrService>()
+        ) as UserRepository
     }
 
     factory { UserFirstTimeCache(getSharedPreferences(androidContext())) }

@@ -4,10 +4,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import com.example.venturahr.R
+import kotlinx.android.synthetic.main.activity_register.*
 
 
 object SpinnerBindingUtil {
@@ -39,5 +42,10 @@ object SpinnerBindingUtil {
     @InverseBindingAdapter(attribute = "selectedValue", event = "selectedValueAttrChanged")
     fun captureSelectedValue(pAppCompatSpinner: AppCompatSpinner): String {
         return pAppCompatSpinner.selectedItem as String
+    }
+
+    @InverseBindingAdapter(attribute = "selectedState")
+    fun getSelectedState(spinner: Spinner): String {
+        return spinner.selectedItem as String
     }
 }

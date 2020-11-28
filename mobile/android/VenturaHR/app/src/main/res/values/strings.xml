@@ -50,6 +50,8 @@
     <string name="weight_title">Peso:</string>
     <string name="description_title">Descrição</string>
     <string name="criteriaList">Requisitos</string>
+    <string name="city">Cidade</string>
+    <string name="loading">Carregando...</string>
 
 
     <string-array name="brazilian_states">

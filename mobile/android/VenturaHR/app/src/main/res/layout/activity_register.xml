@@ -22,18 +22,6 @@
             tools:context=".presentation.register.RegisterActivity">
 
 
-            <TextView
-                android:id="@+id/account_type_title"
-                style="@style/blackTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="32dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/account_type_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_layout"
                 style="@style/defaultTextInputLayout"
@@ -41,7 +29,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/account_type_radio_group">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name"
@@ -49,8 +37,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="@string/name_hint"
-                    android:text="@={viewModel.nameInput}"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:text="@={viewModel.nameInput}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -105,41 +93,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@={viewModel.phoneInput}"
                     android:hint="@string/phone_hint"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="@={viewModel.phoneInput}" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <RadioGroup
-                android:id="@+id/account_type_radio_group"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/account_type_title">
-
-                <RadioButton
-                    android:id="@+id/candidate_radio_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/canditade_radio_button" />
-
-                <RadioButton
-                    android:id="@+id/company_radio_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/company_radio_button" />
-
-                <RadioButton
-                    android:id="@+id/admin_radio_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/admin_radio_button" />
-
-            </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cpf_or_cnpj_layout"
@@ -157,31 +114,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/cpf_hint"
-                    android:text="@={viewModel.cpfOrCnpjInput}"
+                    android:text="@={viewModel.cpfInput}"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/state_title"
-                style="@style/blackTitle"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/city_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/state_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cpf_or_cnpj_layout" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/states_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/state_title"
-                app:layout_constraintTop_toBottomOf="@+id/cpf_or_cnpj_layout" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/state_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/city"
+                    android:text="@={viewModel.cityInput}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_confirm_form"
@@ -194,7 +148,26 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/state_title" />
+                app:layout_constraintTop_toBottomOf="@+id/city_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/state_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cpf_or_cnpj_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.stateInput}"
+                    android:hint="@string/state_title" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
