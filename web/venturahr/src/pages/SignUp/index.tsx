@@ -3,7 +3,7 @@
 import React, { useCallback, useRef } from 'react'
 import { FormHandles } from '@unform/core'
 import logo from '../../assets/app_logo.jpg'
-import { FiArrowLeft, FiMail, FiLock, FiUser, FiPhone, FiCreditCard } from 'react-icons/fi'
+import { FiArrowLeft, FiMail, FiLock, FiUser, FiPhone, FiCreditCard, FiImage, FiAlignJustify} from 'react-icons/fi'
 import { MdLocationOn } from 'react-icons/md'
 import {
     Container,
@@ -32,11 +32,10 @@ const SignUp: React.FC = () => {
             formRef.current?.setErrors({})
 
             const schema = Yup.object().shape({
-                accountType: Yup.string().oneOf(['candidate', 'company']),
                 name: Yup.string().required('Nome obrigatório'),
                 email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
                 password: Yup.string().required('Senha obrigatório').min(6, 'Mínimo de 6 dígitos'),
-                cpfOrCnpj: Yup.string().required('CPF ou CNPJ obrigatório').min(11, 'Mínimo de 11 dígitos'),
+                cnpj: Yup.string().required('CNPJ obrigatório').min(14, 'Mínimo de 14 dígitos'),
                 phone: Yup.string().required('Telefone obrigatório').min(8, 'Mínimo de 8 Dígitos'),
                 city: Yup.string().required('Cidade Obrigatório'),
                 state: Yup.string().required('Estado obrigatório'),
@@ -46,10 +45,10 @@ const SignUp: React.FC = () => {
                 abortEarly: false,
             })
 
-            const user = await UserFactory.create(data)
+            data.accountType = 'company'
 
-            console.log(user)
-            await api.post('/users', user)
+            console.log(data)
+            await api.post('/users', data)
 
             addToast({
                 type: 'success',
@@ -64,6 +63,7 @@ const SignUp: React.FC = () => {
             else {
                 const errors = getValidationErrors(err)
                 formRef.current?.setErrors(errors)
+                console.log(err.message)
 
                 addToast({
                     type: 'error',
@@ -83,11 +83,12 @@ const SignUp: React.FC = () => {
                         <img src={logo} alt="Logo da Empresa" width="150" />
                         <Form ref={formRef} onSubmit={handleSubmit}>
                             <h2>Faça seu cadastro</h2>
-                            <Input name="accountType" icon={FiUser} placeholder="Empresa ou Candidato"></Input>
-                            <Input name="name" icon={FiUser} placeholder="Nome" />
+                            <Input name="name" icon={FiUser} placeholder="Nome da Empresa" />
                             <Input name="email" icon={FiMail} placeholder="E-mail" />
+                            <Input name="companyDescription" icon={FiAlignJustify} placeholder="Descrição da Empresa" />
+                            <Input name="companyLogo" icon={FiImage} placeholder="Logo da Empresa" />
                             <Input name="password" icon={FiLock} placeholder="Senha" type="password" />
-                            <Input name="cpfOrCnpj" icon={FiCreditCard} placeholder="CPF ou CNPJ" />
+                            <Input name="cnpj" icon={FiCreditCard} placeholder="CNPJ" />
                             <Input name="phone" icon={FiPhone} placeholder="Telefone" />
                             <Input name="city" icon={MdLocationOn} placeholder="Cidade" />
                             <Input name="state" icon={MdLocationOn} placeholder="Estado" />

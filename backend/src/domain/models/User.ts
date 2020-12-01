@@ -23,6 +23,12 @@ class User {
   name: string
 
   @Column()
+  companyLogo?: string
+
+  @Column()
+  companyDescription?: string
+
+  @Column()
   email: string
 
   @Column()

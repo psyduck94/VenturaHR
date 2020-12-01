@@ -13,16 +13,39 @@ import { FiXCircle } from 'react-icons/fi'
 import { RiAddCircleLine } from 'react-icons/ri'
 
 interface JobVacancyFormData {
-
+    title: string
+    description: string
+    contractType: string
+    city: string
+    address: string
+    state: string
+    company: string
+    companyLogo: string
+    companyName: string
+    criteriaTitle: string
+    criteriaDescription: string
+    companyDescription: string
+    contractDuration: string
+    closingDate: string
 }
+
+interface CriteriaFormData {
+    jobVacancy: string
+    name: string
+    description: string
+    weight: string
+    pmd: string
+}
+
 
 const numbers = [1, 2, 3, 4, 5]
 
 const CompanyCreateJob: React.FC = () => {
     const formRef = useRef<FormHandles>(null)
-    const [criteriaInputFields, setCriteriaInputFields] = useState([
-        { name: 'Kotlin', pmd: 3, weight: 5, description: 'Saber Kotlin' },
-    ])
+
+    const [criteriaInputFields, setCriteriaInputFields] = useState<CriteriaFormData[]>([{
+        jobVacancy: '', name: '', description: '', pmd: '0', weight: '0',
+    }])
     const { addToast } = useToast()
     const [company] = useState<User>(() => {
         const user = localStorage.getItem('@VenturaHR:user')
@@ -30,7 +53,7 @@ const CompanyCreateJob: React.FC = () => {
     })
 
     const handleAddFields = () => {
-        setCriteriaInputFields([...criteriaInputFields, {name: '', pmd: 0, weight: 0, description: ''}])
+        setCriteriaInputFields([...criteriaInputFields, { jobVacancy: '', name: '', pmd: '0', weight: '0', description: '' }])
     }
 
     const handleRemoveFields = (index: number) => {
@@ -39,11 +62,17 @@ const CompanyCreateJob: React.FC = () => {
         setCriteriaInputFields(values)
     }
 
+    const handleChangeInput = (index: number, name: keyof CriteriaFormData, event: React.ChangeEvent<HTMLInputElement>) => {
+        const values = [...criteriaInputFields]
+        values[index][name] = event.target.value
+        setCriteriaInputFields(values)
+    }
+
     const handleSubmit = useCallback(async (data: JobVacancyFormData) => {
         try {
             const schema = Yup.object().shape({
                 title: Yup.string().required('Título obrigatório'),
-                description: Yup.string().required('Descrição obrigatório'),
+                description: Yup.string().required('Descrição de vaga obrigatório'),
                 contractType: Yup.string().required('Tipo de contrato obrigatório'),
                 closingDate: Yup.string().required('Data de Fechamento obrigatório'),
             })
@@ -52,7 +81,29 @@ const CompanyCreateJob: React.FC = () => {
                 abortEarly: false,
             })
 
-            await api.post('/jobvacancies', data)
+            data.company = company.id
+            data.companyName = company.name
+            data.companyDescription = company.companyDescription
+            data.companyLogo = company.companyLogo
+            data.address = "f8b4063f-3e56-42eb-ba3f-c2c64488c426"
+
+            const jobVacancy = await api.post('/jobvacancies', data)
+            console.log('criteriaInputFields', criteriaInputFields)
+
+            for (let criteria of criteriaInputFields) {
+                const pmd = Number(criteria.pmd)
+                const weight = Number(criteria.weight)
+                const criteriaTemp = {
+                    jobVacancy: jobVacancy.data.id,
+                    name: criteria.name,
+                    description: criteria.description,
+                    pmd: pmd,
+                    weight: weight,
+                }
+                await api.post('/criteriaList', criteriaTemp)
+            }
+
+
 
         } catch (err) {
             const errors = getValidationErrors(err)
@@ -73,7 +124,7 @@ const CompanyCreateJob: React.FC = () => {
                 <h1>Cadastrar Nova Vaga</h1>
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <Input name="title" placeholder="Título da Vaga" />
-                    <Input name="description" placeholder="Descrição" />
+                    <Input name="description" placeholder="Descrição da vaga" />
                     <Input name="contractType" placeholder="Tipo de Contrato" />
                     <Input name="contractDuration" placeholder="Duração de Contrato" />
                     <Input name="closingDate" placeholder="Data de Fechamento" />
@@ -90,24 +141,34 @@ const CompanyCreateJob: React.FC = () => {
                             {criteriaInputFields.map((inputField, index) => (
                                 <tr>
                                     <>
-                                        <td><Input name="title" placeholder="Título" /></td>
-                                        <td className="description"><Input name="description" placeholder="Descrição" /></td>
+                                        <td><Input name="criteriaTitle"
+                                            placeholder="Título"
+                                            value={inputField.name}
+                                            onChange={event => handleChangeInput(index, 'name', event)}
+                                        /></td>
+                                        <td className="description"><Input name="criteriaDescription"
+                                            placeholder="Descrição"
+                                            value={inputField.description}
+                                            onChange={event => handleChangeInput(index, 'description', event)}
+                                        /></td>
                                         <td>
-                                            <select>
+                                            <select name="pmd">
                                                 {numbers.map(number => (
                                                     <option>{number}</option>
                                                 ))}
                                             </select>
                                         </td>
                                         <td>
-                                            <select>
+                                            <select name="weight">
                                                 {numbers.map(number => (
                                                     <option>{number}</option>
                                                 ))}
                                             </select>
                                         </td>
-                                        <FiXCircle size={30} onClick={() => handleRemoveFields(index)} />
-                                        <RiAddCircleLine size={31} onClick={handleAddFields}  />
+                                        <div>
+                                            <FiXCircle size={30} onClick={() => handleRemoveFields(index)} />
+                                            <RiAddCircleLine size={31} onClick={handleAddFields} />
+                                        </div>
                                     </>
                                 </tr>
                             ))}

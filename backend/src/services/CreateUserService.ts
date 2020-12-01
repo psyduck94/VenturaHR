@@ -9,6 +9,8 @@ interface Request {
   accountType: AccountType
   name: string
   email: string
+  companyLogo?: string
+  companyDescription?: string
   password: string
   phone: string
   state: string
@@ -22,6 +24,8 @@ class CreateUserService {
     accountType,
     name,
     email,
+    companyLogo,
+    companyDescription,
     password,
     phone,
     state,
@@ -42,6 +46,8 @@ class CreateUserService {
       accountType,
       name,
       email,
+      companyLogo,
+      companyDescription,
       password: hashedPassword,
       phone,
       state,

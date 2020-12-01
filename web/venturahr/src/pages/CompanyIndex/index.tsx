@@ -45,7 +45,7 @@ const CompanyIndex: React.FC = (...rest) => {
         api.get(`jobvacancies/${company.id}`).then(response => {
             setJobVacancies(response.data)
         })
-    }, [jobVacancies])
+    }, [])
 
     return (
         <>
