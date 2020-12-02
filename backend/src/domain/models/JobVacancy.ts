@@ -4,6 +4,7 @@ import {
 import Address from './Address'
 
 import Criteria from './Criteria'
+import JobVacancyAnswer from './JobVacancyAnswer'
 import User from './User'
 
 @Entity('job_vacancies')
@@ -41,6 +42,9 @@ class JobVacancy {
 
   @ManyToOne(type => User, user => user.publishedJobs)
   company: User
+
+  @OneToOne(type => JobVacancyAnswer, jobVacancyAnswer => jobVacancyAnswer.jobVacancy)
+  jobVacancyAnswer: JobVacancyAnswer
 
   @OneToMany(type => Criteria, criteria => criteria.jobVacancy, { eager: true })
   @JoinColumn({ name: 'criteria' })

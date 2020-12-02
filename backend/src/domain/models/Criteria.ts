@@ -1,6 +1,7 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne,
+  Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne,
 } from 'typeorm'
+import CriteriaAnswer from './CriteriaAnswer'
 import JobVacancy from './JobVacancy'
 
 /* Classe que representa a entidade Critério */
@@ -24,6 +25,9 @@ class Criteria {
 
   @ManyToOne(type => JobVacancy, criteriaList => Criteria)
   jobVacancy: JobVacancy
+
+  @OneToOne(type => CriteriaAnswer, criteriaAnswer => criteriaAnswer.criteria)
+  criteriaAnswer: CriteriaAnswer
 }
 
 export default Criteria
