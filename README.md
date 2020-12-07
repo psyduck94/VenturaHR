@@ -19,6 +19,7 @@ os requisitos para contratação têm um dinamismo vertiginoso,pois as tecnologi
 - **ESLint** - _Padrão de desenvolvimento_
 - **EditorConfig** - _Padrão de desenvolvimento_
 - **Prettier** - _Formatador de código clean_
+- **ExpressJS** - _Framework para consumo de API's_
 
 ### Android
 - **Kotlin** - _Linguagem_
