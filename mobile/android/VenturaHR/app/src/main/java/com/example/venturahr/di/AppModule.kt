@@ -2,24 +2,23 @@ package com.example.venturahr.di
 
 import android.content.Context
 import android.preference.PreferenceManager
+import com.example.venturahr.data.local.cache.UserCache
 import com.example.venturahr.data.local.cache.UserFirstTimeCache
 import com.example.venturahr.data.local.repository.UserFirstTimeRepositoryImpl
+import com.example.venturahr.data.remote.repository.CriteriaAnswerRepositoryImpl
+import com.example.venturahr.data.remote.repository.JobVacancyAnswerRepositoryImpl
 import com.example.venturahr.data.remote.service.VenturaHrService
 import com.example.venturahr.data.remote.repository.JobVacancyRepositoryImpl
 import com.example.venturahr.data.remote.repository.UserRepositoryImpl
-import com.example.venturahr.domain.repository.JobVacancyRepository
-import com.example.venturahr.domain.repository.UserFirstTimeRepository
-import com.example.venturahr.domain.repository.UserRepository
-import com.example.venturahr.domain.usecases.IsUserFirstTime
-import com.example.venturahr.domain.usecases.ListJobVacanciesFromApi
-import com.example.venturahr.domain.usecases.SaveUserToRemoteDatabase
-import com.example.venturahr.domain.usecases.SetItsNotTheUsersFirstTime
+import com.example.venturahr.domain.repository.*
+import com.example.venturahr.domain.usecases.*
 import com.example.venturahr.presentation.account.AccountViewModel
 import com.example.venturahr.presentation.bookmarks.BookmarksViewModel
 import com.example.venturahr.presentation.home.HomeViewModel
 import com.example.venturahr.presentation.home.JobVacancyAdapter
 import com.example.venturahr.presentation.job_vacancy_details.JobVacancyDetailsViewModel
 import com.example.venturahr.presentation.job_vacancy_details.fragments.criteria.CriteriaAdapter
+import com.example.venturahr.presentation.job_vacancy_details.fragments.criteria.CriteriaViewModel
 import com.example.venturahr.presentation.job_vacancy_details.fragments.details.DetailsViewModel
 import com.example.venturahr.presentation.login.LoginViewModel
 import com.example.venturahr.presentation.main.MainViewModel
@@ -48,7 +47,10 @@ val appModule = module {
     }
 
     viewModel {
-        JobVacancyDetailsViewModel()
+        JobVacancyDetailsViewModel(
+            get<SaveJobVacancyAnswerToApi>(),
+            get<SaveCriteriaAnswerToRemoteApi>()
+        )
     }
 
     viewModel {
@@ -57,6 +59,10 @@ val appModule = module {
 
     viewModel {
         LoginViewModel()
+    }
+
+    viewModel {
+        CriteriaViewModel()
     }
 
     viewModel {
@@ -70,13 +76,19 @@ val appModule = module {
 
     factory { JobVacancyAdapter() }
 
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(), get()) }
 
     viewModel { BookmarksViewModel() }
 
     viewModel { AccountViewModel() }
 
     viewModel { MainViewModel() }
+
+    factory { SearchJobsFromApi(get()) }
+
+    factory { SaveCriteriaAnswerToRemoteApi(get()) }
+
+    factory { SaveJobVacancyAnswerToApi(get()) }
 
     factory { SaveUserToRemoteDatabase(get()) }
 
@@ -93,12 +105,27 @@ val appModule = module {
     }
 
     factory {
-        UserRepositoryImpl(
+        JobVacancyAnswerRepositoryImpl(
             get<VenturaHrService>()
+        ) as JobVacancyAnswerRepository
+    }
+
+    factory {
+        UserRepositoryImpl(
+            get<VenturaHrService>(),
+            get<UserCache>()
         ) as UserRepository
     }
 
+    factory {
+        CriteriaAnswerRepositoryImpl(
+            get<VenturaHrService>()
+        ) as CriteriaAnswerRepository
+    }
+
     factory { UserFirstTimeCache(getSharedPreferences(androidContext())) }
+
+    factory { UserCache(getSharedPreferences(androidContext())) }
 
     factory {
         JobVacancyRepositoryImpl(

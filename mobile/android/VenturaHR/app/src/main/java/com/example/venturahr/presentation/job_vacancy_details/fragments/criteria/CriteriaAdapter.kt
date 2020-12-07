@@ -29,6 +29,8 @@ class CriteriaAdapter: RecyclerView.Adapter<CriteriaAdapter.CriteriaViewHolder>(
         notifyDataSetChanged()
     }
 
+    fun getCriteriaList() = criteriaList
+
     override fun onBindViewHolder(holder: CriteriaViewHolder, position: Int) {
         holder.bind(criteriaList[position])
     }

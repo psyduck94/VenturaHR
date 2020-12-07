@@ -30,7 +30,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initBindingConfig()
 
-        initStatesSpinner()
         initViewModelObservers()
         btn_confirm_form.setOnClickListener { viewModel.saveUserToRemoteDb() }
     }
@@ -39,17 +38,6 @@ class RegisterActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-    }
-
-    private fun initStatesSpinner() {
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.brazilian_states,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.statesSpinner.adapter = adapter
-        }
     }
 
     private fun initViewModelObservers() {

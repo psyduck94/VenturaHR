@@ -1,9 +1,8 @@
 import { getCustomRepository } from 'typeorm'
-import { response, Router } from 'express'
+import { Router } from 'express'
 import { parseISO } from 'date-fns'
 import JobVacancyRepository from '../repositories/JobVacancyRepository'
 import CreateJobVacancyService from '../services/CreateJobVacancyService'
-import Criteria from '../domain/models/Criteria'
 
 /* Gerenciamento de Rotas da Aplicação */
 

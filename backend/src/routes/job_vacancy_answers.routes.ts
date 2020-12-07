@@ -17,6 +17,25 @@ jobVacancyAnswerRouter.get('/', async (request, response) => {
   }
 })
 
+jobVacancyAnswerRouter.get('/:jobVacancyId', async (request, response) => {
+  try {
+    const { params } = request
+    const jobVacancyAnswerRepository = getRepository(JobVacancyAnswer)
+    const jobVacancyAnswers = await jobVacancyAnswerRepository
+      .createQueryBuilder('job_vacancy_answer')
+      .innerJoinAndSelect('job_vacancy_answer.jobVacancy', 'jobVacancy')
+      .innerJoinAndSelect('job_vacancy_answer.candidate', 'users')
+      .where('jobVacancy.id = :jobId', {
+        jobId: params.jobVacancyId,
+      })
+      .getMany()
+
+    return response.json(jobVacancyAnswers)
+  } catch (err) {
+    return response.status(400).json({ error: err.message })
+  }
+})
+
 jobVacancyAnswerRouter.post('/', async (request, response) => {
   try {
     const { candidate, jobVacancy } = request.body

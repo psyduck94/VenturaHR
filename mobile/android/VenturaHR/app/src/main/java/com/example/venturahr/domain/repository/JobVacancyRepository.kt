@@ -6,4 +6,5 @@ import com.example.venturahr.domain.model.JobVacancy
 interface JobVacancyRepository {
     suspend fun listJobVacancies(): RequestStatus<List<JobVacancy>>
     suspend fun createJobVacancy(jobVacancy: JobVacancy): RequestStatus<Nothing>
+    suspend fun searchJobs(queryText: String): RequestStatus<List<JobVacancy>>
 }

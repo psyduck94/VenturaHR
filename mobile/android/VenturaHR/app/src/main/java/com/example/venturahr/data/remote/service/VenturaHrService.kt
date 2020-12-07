@@ -1,13 +1,11 @@
 package com.example.venturahr.data.remote.service
 
-import com.example.venturahr.data.remote.model.JobVacancyResponse
-import com.example.venturahr.data.remote.model.UserResponse
-import com.example.venturahr.domain.model.JobVacancy
-import com.example.venturahr.domain.model.User
+import com.example.venturahr.data.remote.model.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface VenturaHrService {
 
@@ -17,6 +15,12 @@ interface VenturaHrService {
     @GET("jobvacancies")
     suspend fun listJobVacancies(): Response<List<JobVacancyResponse>>
 
-    @POST("jobvacancies")
-    suspend fun createJobVacancy(jobVacancy: JobVacancy): Response<JobVacancy>
+    @POST("job_vacancy_answers")
+    suspend fun createJobVacancyAnswer(@Body jobVacancyAnswer: JobVacancyAnswerData): Response<JobVacancyAnswerResponse>
+
+    @POST("criteriaListAnswer")
+    suspend fun createCriteriaAnswer(@Body criteriaAnswerData: List<CriteriaAnswerData>): Response<CriteriaAnswerData>
+
+    @GET("search")
+    suspend fun searchJobs(@Query("query") textQuery: String): Response<List<JobVacancyResponse>>
 }

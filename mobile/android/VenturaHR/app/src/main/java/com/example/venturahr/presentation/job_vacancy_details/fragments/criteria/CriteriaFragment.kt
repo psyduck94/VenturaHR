@@ -19,6 +19,7 @@ class CriteriaFragment : Fragment() {
     }
 
     private val criteriaAdapter by inject<CriteriaAdapter>()
+    private val viewModel by inject<CriteriaViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,12 +40,11 @@ class CriteriaFragment : Fragment() {
             layoutManager = defaultRecyclerViewLayout()
             adapter = criteriaAdapter
         }
-        val criteriaList = getCriteraListFromIntent()
+        val criteriaList = getCriteriaListFromIntent()
         criteriaList?.let { criteriaAdapter.updateCriteriaList(it) }
-
     }
 
-    private fun getCriteraListFromIntent(): List<Criteria>? {
+    private fun getCriteriaListFromIntent(): List<Criteria>? {
         val jobVacancy = activity?.intent?.getParcelableExtra<JobVacancy>("JOB_VACANCY")
         return jobVacancy?.criteriaList
     }

@@ -52,6 +52,7 @@
     <string name="criteriaList">Requisitos</string>
     <string name="city">Cidade</string>
     <string name="loading">Carregando...</string>
+    <string name="job_searching_title">Procurando por vagas: %1$s</string>
 
 
     <string-array name="brazilian_states">

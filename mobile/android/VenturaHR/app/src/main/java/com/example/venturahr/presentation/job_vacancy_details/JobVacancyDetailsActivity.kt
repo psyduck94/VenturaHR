@@ -4,14 +4,19 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import com.example.venturahr.R
+import com.example.venturahr.databinding.ActivityJobVacancyDetailsBinding
 import com.example.venturahr.domain.model.JobVacancy
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_job_vacancy_details.*
+import org.koin.android.ext.android.inject
 
 class JobVacancyDetailsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityJobVacancyDetailsBinding
+    private val viewModel by inject<JobVacancyDetailsViewModel>()
 
     companion object {
         private const val JOB_VACANCY = "JOB_VACANCY"
@@ -24,11 +29,25 @@ class JobVacancyDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_job_vacancy_details)
+        initBindingConfig()
 
         setJobVacancyInfo()
         initJobDetailsPagerAdapter()
         initTabLayout()
+
+        binding.btnApply.setOnClickListener {
+            val job = intent.getParcelableExtra<JobVacancy>(JOB_VACANCY)
+            job?.let {
+                val jobVacancyId = it.id
+                //viewModel.createJobVacancyAnswer(jobVacancyId, )
+            }
+        }
+    }
+
+    private fun initBindingConfig() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_job_vacancy_details)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
     }
 
     private fun initTabLayout() {

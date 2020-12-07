@@ -42,4 +42,24 @@ class JobVacancyRepositoryImpl(private val venturaHrService: VenturaHrService) :
     override suspend fun createJobVacancy(jobVacancy: JobVacancy): RequestStatus<Nothing> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun searchJobs(queryText: String): RequestStatus<List<JobVacancy>> {
+        return withTimeout(REQUEST_TIMEOUT) {
+            try {
+                val response = venturaHrService.searchJobs(queryText)
+
+                if (response.code() in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
+                    val jobVacancies = response.body()?.let {JobVacancyMapper.mapResponseToDomain(it)}
+                    Log.d("searchJobs", response.raw().request().url().toString())
+                    return@withTimeout RequestStatus.Success(jobVacancies as List<JobVacancy>)
+                } else {
+                    Log.d("searchJobs", response.raw().request().url().toString())
+                    return@withTimeout RequestStatus.Error(response.message())
+                }
+            } catch (exception: Exception) {
+                Log.d("searchJobs", exception.message.toString())
+                return@withTimeout RequestStatus.Error(exception.message.toString())
+            }
+        }
+    }
 }

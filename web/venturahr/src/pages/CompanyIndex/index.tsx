@@ -25,6 +25,11 @@ interface JobVacancy {
     address: Address
 }
 
+interface JobVacancyAnswer {
+    id: string
+    candidate: User
+}
+
 const CompanyIndex: React.FC = (...rest) => {
     const { signOut } = useAuth()
     const history = useHistory()
@@ -40,12 +45,18 @@ const CompanyIndex: React.FC = (...rest) => {
     })
 
     const [jobVacancies, setJobVacancies] = useState<JobVacancy[] | null>(null)
+    const [jobVacancyAnswers, setjobVacancyAnswers] = useState<JobVacancyAnswer[] | null>(null)
 
     useEffect(() => {
         api.get(`jobvacancies/${company.id}`).then(response => {
             setJobVacancies(response.data)
+
+            if (response.data) {
+               console.log('job vacancies', response.data)
+            } else console.log('job vacancies', 'VAZIo')
         })
     }, [])
+
 
     return (
         <>
@@ -82,6 +93,23 @@ const CompanyIndex: React.FC = (...rest) => {
                         <Button onClick={() => history.push('/company/create-job')}>PUBLICAR VAGA</Button>
                     </div>
 
+                </JobVacancies>
+
+                <JobVacancies>
+                    <h2>Resposta de Candidatos Para as Vagas:</h2>
+                    {jobVacancies && jobVacancies.map(jobVacancy => (
+                        <>
+                            <h3>{jobVacancy.title}</h3>
+                            <Link to='/'>
+                                <div className="info">
+                                    <strong>{} - {jobVacancy.address.city}</strong>
+                                    <p>{jobVacancy.title}</p>
+                                </div>
+
+                                <FiChevronRight size={20}></FiChevronRight>
+                            </Link>
+                        </>
+                    ))}
                 </JobVacancies>
 
             </MainContainer>
