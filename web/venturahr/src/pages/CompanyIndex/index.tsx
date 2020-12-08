@@ -117,16 +117,21 @@ const CompanyIndex: React.FC = (...rest) => {
                     <h2>Vagas Publicadas</h2>
                     {jobVacancies && jobVacancies.map(jobVacancy => (
                         <>
-                        <Link key={jobVacancy.id} to="/">
-                            <img src={jobVacancy.companyLogo}
-                                alt="logo da empresa"
-                                width="40px" />
-                            <div className="info">
-                                <strong>{jobVacancy.companyName} - {jobVacancy.address.city}</strong>
-                                <p>{jobVacancy.title}</p>
-                            </div>
-                            <FiChevronRight size={20}></FiChevronRight>
-                        </Link>
+                            <button
+                                onClick={() => history.push(`update-job/${jobVacancy.id}`)}>
+                                Atualizar
+                            </button>
+                            <button>Deletar</button>
+                            <Link key={jobVacancy.id} to="/">
+                                <img src={jobVacancy.companyLogo}
+                                    alt="logo da empresa"
+                                    width="40px" />
+                                <div className="info">
+                                    <strong>{jobVacancy.companyName} - {jobVacancy.address.city}</strong>
+                                    <p>{jobVacancy.title}</p>
+                                </div>
+                                <FiChevronRight size={20}></FiChevronRight>
+                            </Link>
 
                         </>
                     ))}

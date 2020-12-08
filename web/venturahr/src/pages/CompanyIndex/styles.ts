@@ -68,6 +68,15 @@ export const JobVacancies = styled.div`
         margin-left: auto;
     }
 
+    button {
+        margin-right: 16px;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        border: 2px solid #e5340a;
+        padding: 8px 4px;
+        color: #FFF;
+    }
+
     a {
         transition: all 0.3s ease 0s;
         margin-bottom: 15px;
