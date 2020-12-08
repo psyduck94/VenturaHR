@@ -84,6 +84,13 @@ const CompanyIndex: React.FC = (...rest) => {
         })
     }
 
+
+    const handleDeleteJobVacancy = (jobVacancyId: string) => {
+        api.delete(`jobvacancies/${jobVacancyId}`).then(response => {
+            window.location.reload()
+        })
+    }
+
     useEffect(() => {
         api.get(`jobvacancies/company/${company.id}`).then(response => {
             const jobVacancies = response.data
@@ -94,7 +101,6 @@ const CompanyIndex: React.FC = (...rest) => {
                     console.log('jobVacancyId', jobVacancy.id)
                     getJobVacancyAnswersFromApi(jobVacancy.id)
                 }
-
             }
         })
     }, [])
@@ -121,7 +127,7 @@ const CompanyIndex: React.FC = (...rest) => {
                                 onClick={() => history.push(`update-job/${jobVacancy.id}`)}>
                                 Atualizar
                             </button>
-                            <button>Deletar</button>
+                            <button onClick={() => handleDeleteJobVacancy(jobVacancy.id)}>Deletar</button>
                             <Link key={jobVacancy.id} to={`/jobvacancies/${jobVacancy.id}`}>
                                 <img src={jobVacancy.companyLogo}
                                     alt="logo da empresa"
