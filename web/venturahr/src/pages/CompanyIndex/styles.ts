@@ -54,13 +54,18 @@ export const MainContainer = styled.div`
 `
 
 export const JobVacancies = styled.div`
-    max-width: 50%;
+    max-width: 55%;
 
     h2 {
         color: #4f4f4f;
         margin-top: 32px;
         font-size: 1.5rem;
         margin-bottom: 16px;
+    }
+
+    h3 {
+        margin-bottom: 16px;
+        margin-left: auto;
     }
 
     a {

@@ -11,6 +11,7 @@ import { Container } from './styles'
 import getValidationErrors from '../../utils/getValidationErrors'
 import { FiXCircle } from 'react-icons/fi'
 import { RiAddCircleLine } from 'react-icons/ri'
+import { useHistory } from 'react-router-dom'
 
 interface JobVacancyFormData {
     title: string
@@ -42,6 +43,7 @@ const numbers = [1, 2, 3, 4, 5]
 
 const CompanyCreateJob: React.FC = () => {
     const formRef = useRef<FormHandles>(null)
+    const history = useHistory()
 
     const [criteriaInputFields, setCriteriaInputFields] = useState<CriteriaFormData[]>([{
         jobVacancy: '', name: '', description: '', pmd: '0', weight: '0',
@@ -103,7 +105,7 @@ const CompanyCreateJob: React.FC = () => {
                 await api.post('/criteriaList', criteriaTemp)
             }
 
-
+            history.push('/company/index')
 
         } catch (err) {
             const errors = getValidationErrors(err)

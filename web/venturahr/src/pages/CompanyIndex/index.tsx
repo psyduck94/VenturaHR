@@ -25,10 +25,23 @@ interface JobVacancy {
     address: Address
 }
 
+interface Criteria {
+    pmd: number
+    weight: number
+}
+
+interface CriteriaAnswer {
+    selfEvaluation: number
+    criteria: Criteria
+}
+
 interface JobVacancyAnswer {
     id: string
     candidate: User
+    jobVacancy: JobVacancy
+    criteriaListAnswer: CriteriaAnswer[]
 }
+
 
 const CompanyIndex: React.FC = (...rest) => {
     const { signOut } = useAuth()
@@ -45,18 +58,46 @@ const CompanyIndex: React.FC = (...rest) => {
     })
 
     const [jobVacancies, setJobVacancies] = useState<JobVacancy[] | null>(null)
-    const [jobVacancyAnswers, setjobVacancyAnswers] = useState<JobVacancyAnswer[] | null>(null)
+    const [jobVacancyAnswers, setjobVacancyAnswers] = useState<JobVacancyAnswer[]>([] as JobVacancyAnswer[])
+
+    const calculateCandidateRanking = (listOfCriteriaAnswers: CriteriaAnswer[]) => {
+        let selfEvaluationAndWeightAdition = 0
+        let weightAdition = 0
+        for (const criteriaAnswer of listOfCriteriaAnswers) {
+            const selfEvaluation = criteriaAnswer.selfEvaluation
+            const weight = criteriaAnswer.criteria.weight
+            selfEvaluationAndWeightAdition += (selfEvaluation * weight)
+            weightAdition += weight
+        }
+        return (selfEvaluationAndWeightAdition / weightAdition) + "/5"
+    }
+
+    const getJobVacancyAnswersFromApi = (jobVacancyId: CriteriaAnswer[]) => {
+        api.get(`job_vacancy_answers/${jobVacancyId}`).then(response => {
+            const jobVacancyAnswers = response.data
+
+            for (const jobVacancyAnswer of jobVacancyAnswers) {
+                if (!jobVacancyAnswers.includes(jobVacancyAnswer)) {
+                    setjobVacancyAnswers([...jobVacancyAnswers, jobVacancyAnswer])
+                } else setjobVacancyAnswers(jobVacancyAnswers)
+            }
+        })
+    }
 
     useEffect(() => {
-        api.get(`jobvacancies/${company.id}`).then(response => {
-            setJobVacancies(response.data)
+        api.get(`jobvacancies/company/${company.id}`).then(response => {
+            const jobVacancies = response.data
+            setJobVacancies(jobVacancies)
 
-            if (response.data) {
-               console.log('job vacancies', response.data)
-            } else console.log('job vacancies', 'VAZIo')
+            if (jobVacancies) {
+                for (const jobVacancy of jobVacancies) {
+                    console.log('jobVacancyId', jobVacancy.id)
+                    getJobVacancyAnswersFromApi(jobVacancy.id)
+                }
+
+            }
         })
     }, [])
-
 
     return (
         <>
@@ -75,8 +116,8 @@ const CompanyIndex: React.FC = (...rest) => {
                 <JobVacancies>
                     <h2>Vagas Publicadas</h2>
                     {jobVacancies && jobVacancies.map(jobVacancy => (
-
-                        <Link to='/'>
+                        <>
+                        <Link key={jobVacancy.id} to="/">
                             <img src={jobVacancy.companyLogo}
                                 alt="logo da empresa"
                                 width="40px" />
@@ -84,9 +125,10 @@ const CompanyIndex: React.FC = (...rest) => {
                                 <strong>{jobVacancy.companyName} - {jobVacancy.address.city}</strong>
                                 <p>{jobVacancy.title}</p>
                             </div>
-
                             <FiChevronRight size={20}></FiChevronRight>
                         </Link>
+
+                        </>
                     ))}
 
                     <div className="button">
@@ -96,24 +138,24 @@ const CompanyIndex: React.FC = (...rest) => {
                 </JobVacancies>
 
                 <JobVacancies>
-                    <h2>Resposta de Candidatos Para as Vagas:</h2>
-                    {jobVacancies && jobVacancies.map(jobVacancy => (
+                    <h2>Respostas</h2>
+                    {jobVacancyAnswers.map(jobVacancyAnswer => (
                         <>
-                            <h3>{jobVacancy.title}</h3>
                             <Link to='/'>
+                                <strong>{jobVacancyAnswer.jobVacancy.title}</strong>
                                 <div className="info">
-                                    <strong>{} - {jobVacancy.address.city}</strong>
-                                    <p>{jobVacancy.title}</p>
+                                    <strong>{jobVacancyAnswer.candidate.name} - {jobVacancyAnswer.candidate.phone}</strong>
+                                    <p>{jobVacancyAnswer.candidate.email}</p>
                                 </div>
-
+                                <h3>{calculateCandidateRanking(jobVacancyAnswer.criteriaListAnswer)}</h3>
                                 <FiChevronRight size={20}></FiChevronRight>
                             </Link>
                         </>
                     ))}
+
                 </JobVacancies>
 
             </MainContainer>
-
         </>
     )
 }
