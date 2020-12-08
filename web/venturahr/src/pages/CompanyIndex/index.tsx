@@ -73,7 +73,7 @@ const CompanyIndex: React.FC = (...rest) => {
     }
 
     const getJobVacancyAnswersFromApi = (jobVacancyId: CriteriaAnswer[]) => {
-        api.get(`job_vacancy_answers/${jobVacancyId}`).then(response => {
+        api.get(`job_vacancy_answers/jobvacancy/${jobVacancyId}`).then(response => {
             const jobVacancyAnswers = response.data
 
             for (const jobVacancyAnswer of jobVacancyAnswers) {
@@ -146,7 +146,7 @@ const CompanyIndex: React.FC = (...rest) => {
                     <h2>Respostas</h2>
                     {jobVacancyAnswers.map(jobVacancyAnswer => (
                         <>
-                            <Link to='/'>
+                            <Link to={`/company/job-answer-details/${jobVacancyAnswer.id}`}>
                                 <strong>{jobVacancyAnswer.jobVacancy.title}</strong>
                                 <div className="info">
                                     <strong>{jobVacancyAnswer.candidate.name} - {jobVacancyAnswer.candidate.phone}</strong>

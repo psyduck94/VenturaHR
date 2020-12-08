@@ -11,6 +11,7 @@ import Login from '../pages/Login'
 import CompanyIndex from '../pages/CompanyIndex'
 import CompanyCreateJob from '../pages/CompanyCreateJob'
 import CompanyUpdateJob from '../pages/CompanyUpdateJob'
+import JobAnswerDetails from '../pages/JobAnswerDetails'
 
 const Routes: React.FC = () => (
     <Switch>
@@ -21,6 +22,7 @@ const Routes: React.FC = () => (
         <Route path="/company/index" component={CompanyIndex} isPrivate />
         <Route path="/company/create-job" component={CompanyCreateJob} isPrivate />
         <Route path="/company/update-job/:id+" component={CompanyUpdateJob} isPrivate />
+        <Route path="/company/job-answer-details/:id+" component={JobAnswerDetails} isPrivate />
     </Switch>
 )
 

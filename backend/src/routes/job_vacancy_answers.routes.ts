@@ -17,7 +17,7 @@ jobVacancyAnswerRouter.get('/', async (request, response) => {
   }
 })
 
-jobVacancyAnswerRouter.get('/:jobVacancyId', async (request, response) => {
+jobVacancyAnswerRouter.get('/jobvacancy/:jobVacancyId', async (request, response) => {
   try {
     const { params } = request
     const jobVacancyAnswerRepository = getRepository(JobVacancyAnswer)
@@ -31,6 +31,27 @@ jobVacancyAnswerRouter.get('/:jobVacancyId', async (request, response) => {
         jobId: params.jobVacancyId,
       })
       .getMany()
+
+    return response.json(jobVacancyAnswers)
+  } catch (err) {
+    return response.status(400).json({ error: err.message })
+  }
+})
+
+jobVacancyAnswerRouter.get('/:id', async (request, response) => {
+  try {
+    const { params } = request
+    const jobVacancyAnswerRepository = getRepository(JobVacancyAnswer)
+    const jobVacancyAnswers = await jobVacancyAnswerRepository
+      .createQueryBuilder('job_vacancy_answer')
+      .innerJoinAndSelect('job_vacancy_answer.jobVacancy', 'jobVacancy')
+      .innerJoinAndSelect('job_vacancy_answer.candidate', 'users')
+      .innerJoinAndSelect('job_vacancy_answer.criteriaListAnswer', 'criteria_answer')
+      .innerJoinAndSelect('criteria_answer.criteria', 'criteria')
+      .where('job_vacancy_answer.id = :jobAnswerId', {
+        jobAnswerId: params.id,
+      })
+      .getOne()
 
     return response.json(jobVacancyAnswers)
   } catch (err) {
