@@ -16,7 +16,7 @@ import JobAnswerDetails from '../pages/JobAnswerDetails'
 const Routes: React.FC = () => (
     <Switch>
         <Route path="/" exact component={Index} />
-        <Route path="/jobvacancies/:id+" component={JobVacancyDetails} />
+        <Route path="/jobvacancies/:id+" component={JobVacancyDetails} isPrivate />
         <Route path="/cadastro" component={Cadastro} />
         <Route path="/login" component={Login} />
         <Route path="/company/index" component={CompanyIndex} isPrivate />

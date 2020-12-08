@@ -122,7 +122,7 @@ const CompanyIndex: React.FC = (...rest) => {
                                 Atualizar
                             </button>
                             <button>Deletar</button>
-                            <Link key={jobVacancy.id} to="/">
+                            <Link key={jobVacancy.id} to={`/jobvacancies/${jobVacancy.id}`}>
                                 <img src={jobVacancy.companyLogo}
                                     alt="logo da empresa"
                                     width="40px" />
