@@ -18,7 +18,7 @@ jobVacanciesRouter.get('/', async (request, response) => {
   }
 })
 
-jobVacanciesRouter.get('/:company', async (request, response) => {
+jobVacanciesRouter.get('/company/:company', async (request, response) => {
   try {
     const { params } = request
     const jobVacanciesRepository = getCustomRepository(JobVacancyRepository)

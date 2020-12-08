@@ -18,15 +18,14 @@ criteriaAnswerRouter.get('/', async (request, response) => {
 criteriaAnswerRouter.post('/', async (request, response) => {
   try {
     const {
-      pmd,
-      weight,
+      selfEvaluation,
       criteria,
       jobVacancyAnswer,
     } = request.body
 
     const createCriteriaAnswer = new CreateCriteriaAnswerService()
     const criteriaAnswer = await createCriteriaAnswer.execute({
-      pmd, weight, criteria, jobVacancyAnswer,
+      selfEvaluation, criteria, jobVacancyAnswer,
     })
 
     return response.json(criteriaAnswer)

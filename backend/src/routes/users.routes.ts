@@ -36,6 +36,18 @@ usersRouter.get('/:id', async (request, response) => {
   }
 })
 
+usersRouter.get('/email/:email', async (request, response) => {
+  try {
+    const { params } = request
+    const userRepository = getRepository(User)
+    const user = await userRepository.findOne({ where: params })
+
+    return response.json(user?.id)
+  } catch (err) {
+    return response.status(400).json({ error: err.message })
+  }
+})
+
 usersRouter.post('/', async (request, response) => {
   try {
     const {

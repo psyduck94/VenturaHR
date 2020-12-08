@@ -25,6 +25,8 @@ jobVacancyAnswerRouter.get('/:jobVacancyId', async (request, response) => {
       .createQueryBuilder('job_vacancy_answer')
       .innerJoinAndSelect('job_vacancy_answer.jobVacancy', 'jobVacancy')
       .innerJoinAndSelect('job_vacancy_answer.candidate', 'users')
+      .innerJoinAndSelect('job_vacancy_answer.criteriaListAnswer', 'criteria_answer')
+      .innerJoinAndSelect('criteria_answer.criteria', 'criteria')
       .where('jobVacancy.id = :jobId', {
         jobId: params.jobVacancyId,
       })
