@@ -3,10 +3,12 @@ package com.example.venturahr.presentation.job_vacancy_details.fragments.criteri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.venturahr.R
 import com.example.venturahr.domain.model.Criteria
+import com.example.venturahr.domain.model.CriteriaItem
 
 class CriteriaAdapter: RecyclerView.Adapter<CriteriaAdapter.CriteriaViewHolder>() {
 
@@ -40,10 +42,14 @@ class CriteriaAdapter: RecyclerView.Adapter<CriteriaAdapter.CriteriaViewHolder>(
     class CriteriaViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val name = itemView.findViewById<TextView>(R.id.name)
         private val description = itemView.findViewById<TextView>(R.id.description)
+        private val ratingBar = itemView.findViewById<RatingBar>(R.id.ratingBar)
 
         fun bind(criteria: Criteria) {
             name.text = criteria.name
             description.text = criteria.description
+            ratingBar.setOnRatingBarChangeListener { ratingBar, rating, b ->
+                criteria.selfEvaluation = rating.toInt()
+            }
         }
     }
 

@@ -43,12 +43,32 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun saveUserId(userId: String) {
-        userCache.saveUserId(userId)
+    override suspend fun getUserId(email: String): String {
+        Log.d("get USER ID - EMAIL", email)
+        return withTimeout(REQUEST_TIMEOUT) {
+            try {
+                val response = venturaHrService.getUserIdByEmail(email)
+                if (response.code() in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
+                    Log.d("get USER ID - URL", response.raw().request().url().toString())
+                    return@withTimeout response.body() ?: ""
+                } else {
+                    Log.d("get USER ID - URL", response.raw().request().url().toString())
+                    return@withTimeout "Erro"
+                }
+            } catch (exception: Exception) {
+                val exceptionMessage = exception.message.toString()
+                Log.d("get USER ID - error", exceptionMessage)
+                return@withTimeout "Erro"
+            }
+        }
     }
 
-    override suspend fun getUserId(): String {
-        return userCache.getUserId() ?: ""
+    override fun getApplyButtonState(jobVacancyId: String): Boolean {
+        return userCache.getApplyButtonState(jobVacancyId)
+    }
+
+    override fun setApplyButtonState(jobVacancyId: String, state: Boolean) {
+        userCache.setApplyButtonState(jobVacancyId, state)
     }
 
     private fun printResponseUrl(response: Response<UserResponse>) {

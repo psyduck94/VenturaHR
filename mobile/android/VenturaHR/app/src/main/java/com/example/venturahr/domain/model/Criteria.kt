@@ -8,6 +8,7 @@ data class Criteria(
     val id: String,
     val name: String,
     val pmd: Byte,
+    var selfEvaluation: Int? = 0,
     val weight: Byte,
     val description: String
 ) : Parcelable

@@ -19,7 +19,7 @@ class CriteriaAnswerRepositoryImpl(private val venturaHrService: VenturaHrServic
         private const val REQUEST_TIMEOUT = 5000L
     }
 
-    override suspend fun createCriteriaAnswer(criteriaAnswer: List<CriteriaAnswer>): RequestStatus<String> {
+    override suspend fun createCriteriaAnswer(criteriaAnswer: CriteriaAnswer): RequestStatus<String> {
         return withTimeout(REQUEST_TIMEOUT) {
             try {
                 val response = venturaHrService.createCriteriaAnswer(
@@ -35,14 +35,14 @@ class CriteriaAnswerRepositoryImpl(private val venturaHrService: VenturaHrServic
                 }
             } catch (exception: Exception) {
                 val exceptionMessage = exception.message.toString()
-                Log.d("post USER - error", exceptionMessage)
+                Log.d("post CRITERIA - error", exceptionMessage)
                 return@withTimeout RequestStatus.Error(exceptionMessage)
             }
         }
     }
 
     private fun printResponseUrl(response: Response<CriteriaAnswerData>) {
-        Log.d("post USER - URL", response.raw().request().url().toString())
+        Log.d("post CRITERIA - URL", response.raw().request().url().toString())
     }
 
 }

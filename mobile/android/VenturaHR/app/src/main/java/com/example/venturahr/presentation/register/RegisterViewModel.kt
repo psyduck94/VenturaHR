@@ -75,7 +75,6 @@ class RegisterViewModel(
                 saveUserToRemoteDatabase(user)
             } else statusMessageLiveData.value = R.string.warning_invalid_form
         }
-
     }
 
     private fun logUserAuthState(message: String) {

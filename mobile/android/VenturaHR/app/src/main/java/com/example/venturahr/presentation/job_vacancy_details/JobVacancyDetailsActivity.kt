@@ -34,14 +34,6 @@ class JobVacancyDetailsActivity : AppCompatActivity() {
         setJobVacancyInfo()
         initJobDetailsPagerAdapter()
         initTabLayout()
-
-        binding.btnApply.setOnClickListener {
-            val job = intent.getParcelableExtra<JobVacancy>(JOB_VACANCY)
-            job?.let {
-                val jobVacancyId = it.id
-                //viewModel.createJobVacancyAnswer(jobVacancyId, )
-            }
-        }
     }
 
     private fun initBindingConfig() {

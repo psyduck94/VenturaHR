@@ -4,5 +4,5 @@ import com.example.venturahr.domain.enums.RequestStatus
 import com.example.venturahr.domain.model.CriteriaAnswer
 
 interface CriteriaAnswerRepository {
-    suspend fun createCriteriaAnswer(criteriaAnswer: List<CriteriaAnswer>): RequestStatus<String>
+    suspend fun createCriteriaAnswer(criteriaAnswer: CriteriaAnswer): RequestStatus<String>
 }

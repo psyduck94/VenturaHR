@@ -8,11 +8,11 @@ class UserCache(private val sharedPreferences: SharedPreferences) {
         const val DEFAULT_USER_ID = ""
     }
 
-    fun saveUserId(userId: String) {
+    fun setApplyButtonState(jobVacancyId: String, state: Boolean) {
         val editor = sharedPreferences.edit()
-        editor.putString(USER_ID_KEY, userId)
+        editor.putBoolean(jobVacancyId, state)
         editor.apply()
     }
 
-    fun getUserId() = sharedPreferences.getString(USER_ID_KEY, DEFAULT_USER_ID)
+    fun getApplyButtonState(jobVacancyId: String) = sharedPreferences.getBoolean(jobVacancyId, true)
 }

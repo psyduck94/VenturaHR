@@ -53,6 +53,7 @@
     <string name="city">Cidade</string>
     <string name="loading">Carregando...</string>
     <string name="job_searching_title">Procurando por vagas: %1$s</string>
+    <string name="btn_sign_out">SAIR</string>
 
 
     <string-array name="brazilian_states">

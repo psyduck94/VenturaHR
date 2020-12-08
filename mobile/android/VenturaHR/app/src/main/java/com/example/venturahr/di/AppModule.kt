@@ -47,10 +47,7 @@ val appModule = module {
     }
 
     viewModel {
-        JobVacancyDetailsViewModel(
-            get<SaveJobVacancyAnswerToApi>(),
-            get<SaveCriteriaAnswerToRemoteApi>()
-        )
+        JobVacancyDetailsViewModel()
     }
 
     viewModel {
@@ -62,7 +59,7 @@ val appModule = module {
     }
 
     viewModel {
-        CriteriaViewModel()
+        CriteriaViewModel(get(), get(), get(), get(), get(), FirebaseAuth . getInstance ())
     }
 
     viewModel {
@@ -80,9 +77,15 @@ val appModule = module {
 
     viewModel { BookmarksViewModel() }
 
-    viewModel { AccountViewModel() }
+    viewModel { AccountViewModel(FirebaseAuth.getInstance()) }
 
     viewModel { MainViewModel() }
+
+    factory { SetApplyButtonState(get()) }
+
+    factory { GetApplyButtonState(get()) }
+
+    factory { GetUserIdFromEmail(get()) }
 
     factory { SearchJobsFromApi(get()) }
 
