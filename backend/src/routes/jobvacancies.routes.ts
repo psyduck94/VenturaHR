@@ -1,8 +1,9 @@
-import { getCustomRepository } from 'typeorm'
+import { getCustomRepository, getRepository } from 'typeorm'
 import { Router } from 'express'
 import { parseISO } from 'date-fns'
 import JobVacancyRepository from '../repositories/JobVacancyRepository'
 import CreateJobVacancyService from '../services/CreateJobVacancyService'
+import JobVacancy from '../domain/models/JobVacancy'
 
 /* Gerenciamento de Rotas da Aplicação */
 
@@ -46,6 +47,21 @@ jobVacanciesRouter.delete('/:id', async (request, response) => {
     const jobVacanciesRepository = getCustomRepository(JobVacancyRepository)
     const jobVacancy = await jobVacanciesRepository.delete(params)
     return response.json(jobVacancy)
+  } catch (err) {
+    return response.status(400).json({ error: err.message })
+  }
+})
+
+jobVacanciesRouter.put('/:id', async (request, response) => {
+  try {
+    const jobVacancyRepository = getRepository(JobVacancy)
+    const jobVacancy = await jobVacancyRepository.findOne(request.params.id)
+
+    if (jobVacancy) {
+      jobVacancyRepository.merge(jobVacancy, request.body)
+      const results = await jobVacancyRepository.save(jobVacancy)
+      return response.json(results)
+    } return response.status(500).json({ error: 'JobVacancy does not exist' })
   } catch (err) {
     return response.status(400).json({ error: err.message })
   }
