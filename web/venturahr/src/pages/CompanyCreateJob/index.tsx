@@ -46,7 +46,7 @@ const CompanyCreateJob: React.FC = () => {
     const history = useHistory()
 
     const [criteriaInputFields, setCriteriaInputFields] = useState<CriteriaFormData[]>([{
-        jobVacancy: '', name: '', description: '', pmd: '0', weight: '0',
+        jobVacancy: '', name: '', description: '', pmd: '1', weight: '1',
     }])
     const { addToast } = useToast()
     const [company] = useState<User>(() => {
@@ -55,7 +55,7 @@ const CompanyCreateJob: React.FC = () => {
     })
 
     const handleAddFields = () => {
-        setCriteriaInputFields([...criteriaInputFields, { jobVacancy: '', name: '', pmd: '0', weight: '0', description: '' }])
+        setCriteriaInputFields([...criteriaInputFields, { jobVacancy: '', name: '', pmd: '', weight: '', description: '' }])
     }
 
     const handleRemoveFields = (index: number) => {
@@ -75,6 +75,8 @@ const CompanyCreateJob: React.FC = () => {
             const schema = Yup.object().shape({
                 title: Yup.string().required('Título obrigatório'),
                 description: Yup.string().required('Descrição de vaga obrigatório'),
+                pmd: Yup.string().required('PMD obrigatório'),
+                weight: Yup.string().required('Peso obrigatório'),
                 contractType: Yup.string().required('Tipo de contrato obrigatório'),
                 closingDate: Yup.string().required('Data de Fechamento obrigatório'),
             })
@@ -154,18 +156,18 @@ const CompanyCreateJob: React.FC = () => {
                                             onChange={event => handleChangeInput(index, 'description', event)}
                                         /></td>
                                         <td>
-                                            <select name="pmd">
-                                                {numbers.map(number => (
-                                                    <option>{number}</option>
-                                                ))}
-                                            </select>
+                                        <Input name="pmd"
+                                            placeholder="PMD de 1 a 5"
+                                            value={inputField.pmd}
+                                            onChange={event => handleChangeInput(index, 'pmd', event)}
+                                            ></Input>
                                         </td>
                                         <td>
-                                            <select name="weight">
-                                                {numbers.map(number => (
-                                                    <option>{number}</option>
-                                                ))}
-                                            </select>
+                                            <Input name="weight"
+                                            placeholder="Peso de 1 a 5"
+                                            value={inputField.weight}
+                                            onChange={event => handleChangeInput(index, 'weight', event)}
+                                            ></Input>
                                         </td>
                                         <div>
                                             <FiXCircle size={30} onClick={() => handleRemoveFields(index)} />
@@ -176,7 +178,6 @@ const CompanyCreateJob: React.FC = () => {
                             ))}
                         </tbody>
                     </table>
-
 
                     <Button type="submit">Cadastrar</Button>
                 </Form>

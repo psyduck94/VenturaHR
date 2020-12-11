@@ -42,10 +42,10 @@ interface JobVacancyAnswer {
     criteriaListAnswer: CriteriaAnswer[]
 }
 
-
 const CompanyIndex: React.FC = (...rest) => {
     const { signOut } = useAuth()
     const history = useHistory()
+    const allJobVacancyAnswers: JobVacancyAnswer[][] = []
 
     const handleSignOut = useCallback(() => {
         signOut()
@@ -58,7 +58,7 @@ const CompanyIndex: React.FC = (...rest) => {
     })
 
     const [jobVacancies, setJobVacancies] = useState<JobVacancy[] | null>(null)
-    const [jobVacancyAnswers, setjobVacancyAnswers] = useState<JobVacancyAnswer[]>([] as JobVacancyAnswer[])
+    const [jobVacancyAnswers, setjobVacancyAnswers] = useState<JobVacancyAnswer[][]>([] as JobVacancyAnswer[][])
 
     const calculateCandidateRanking = (listOfCriteriaAnswers: CriteriaAnswer[]) => {
         let selfEvaluationAndWeightAdition = 0
@@ -76,14 +76,11 @@ const CompanyIndex: React.FC = (...rest) => {
         api.get(`job_vacancy_answers/jobvacancy/${jobVacancyId}`).then(response => {
             const jobVacancyAnswers = response.data
 
-            for (const jobVacancyAnswer of jobVacancyAnswers) {
-                if (!jobVacancyAnswers.includes(jobVacancyAnswer)) {
-                    setjobVacancyAnswers([...jobVacancyAnswers, jobVacancyAnswer])
-                } else setjobVacancyAnswers(jobVacancyAnswers)
-            }
+            allJobVacancyAnswers.push(jobVacancyAnswers)
+            console.log('allJobVacancyAnswers', allJobVacancyAnswers)
+            setjobVacancyAnswers([...allJobVacancyAnswers])
         })
     }
-
 
     const handleDeleteJobVacancy = (jobVacancyId: string) => {
         api.delete(`jobvacancies/${jobVacancyId}`).then(response => {
@@ -150,17 +147,20 @@ const CompanyIndex: React.FC = (...rest) => {
 
                 <JobVacancies>
                     <h2>Respostas</h2>
-                    {jobVacancyAnswers.map(jobVacancyAnswer => (
+                    {jobVacancyAnswers.map(jobVacancyAnswers => (
                         <>
-                            <Link to={`/company/job-answer-details/${jobVacancyAnswer.id}`}>
-                                <strong>{jobVacancyAnswer.jobVacancy.title}</strong>
-                                <div className="info">
-                                    <strong>{jobVacancyAnswer.candidate.name} - {jobVacancyAnswer.candidate.phone}</strong>
-                                    <p>{jobVacancyAnswer.candidate.email}</p>
-                                </div>
-                                <h3>{calculateCandidateRanking(jobVacancyAnswer.criteriaListAnswer)}</h3>
-                                <FiChevronRight size={20}></FiChevronRight>
-                            </Link>
+                            {jobVacancyAnswers.map(jobVacancyAnswer => (
+
+                                <Link to={`/company/job-answer-details/${jobVacancyAnswer.id}`}>
+                                    <strong>{jobVacancyAnswer.jobVacancy.title}</strong>
+                                    <div className="info">
+                                        <strong>{jobVacancyAnswer.candidate.name} - {jobVacancyAnswer.candidate.phone}</strong>
+                                        <p>{jobVacancyAnswer.candidate.email}</p>
+                                    </div>
+                                    <h3>{calculateCandidateRanking(jobVacancyAnswer.criteriaListAnswer)}</h3>
+                                    <FiChevronRight size={20}></FiChevronRight>
+                                </Link>
+                            ))}
                         </>
                     ))}
 
